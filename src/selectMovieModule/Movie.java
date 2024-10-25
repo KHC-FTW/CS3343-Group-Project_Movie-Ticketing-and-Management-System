@@ -125,12 +125,12 @@ public class Movie{
 	
 	@Override
 	public boolean equals(Object movie) {
-		return this.name == ((Movie)movie).getName() 
-				&& this.genre == ((Movie)movie).getGenre() 
+		return this.name.equals(((Movie)movie).getName()) 
+				&& this.genre.equals(((Movie)movie).getGenre()) 
 				&& this.duration == ((Movie)movie).getDuration() 
 				&& this.price == ((Movie)movie).getPrice() 
-				&& this.classification == ((Movie)movie).getClassification() 
-				&& this.language == ((Movie)movie).getLanguage() 
-				&& this.subtitles == ((Movie)movie).getSubtitles();
+				&& this.classification.equals(((Movie)movie).getClassification()) 
+				&& this.language.equals(((Movie)movie).getLanguage()) 
+				&& this.subtitles.equals(((Movie)movie).getSubtitles());
 	}
 }
