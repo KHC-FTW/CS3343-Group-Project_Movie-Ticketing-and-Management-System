@@ -1,6 +1,5 @@
 package Product;
 
-import java.util.Optional;
 
 /**
  * Interface for all products
