@@ -1,4 +1,4 @@
-package ShoppingCert;
+package ShoppingCart;
 
 import Product.Product;
 import selectMovieModule.Movie;
@@ -9,29 +9,29 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * ShoppingCert class that contains all products in the shopping cart
+ * ShoppingCart class that contains all products in the shopping cart
  */
-public class ShoppingCert {
-    private final Map<Product, Integer> productCert;
-    private final Map<Movie, Integer> movieCert;
+public class ShoppingCart {
+    private final Map<Product, Integer> productCart;
+    private final Map<Movie, Integer> movieCart;
 
     /**
-     * Default constructor for ShoppingCert class, which initializes the shopping cert of products and movies
+     * Default constructor for ShoppingCart class, which initializes the shopping Cart of products and movies
      */
-    public ShoppingCert() {
-        productCert = new HashMap<>();
-        movieCert = new HashMap<>();
+    public ShoppingCart() {
+        productCart = new HashMap<>();
+        movieCart = new HashMap<>();
     }
 
     /**
-     * Constructor for ShoppingCert class, which the cert is initialized with the hashmap of products and movies passed into the constructor
+     * Constructor for ShoppingCart class, which the Cart is initialized with the hashmap of products and movies passed into the constructor
      *
-     * @param productCert : products in the shopping cart
-     * @param movieCert   : movies in the shopping cart
+     * @param productCart : products in the shopping cart
+     * @param movieCart   : movies in the shopping cart
      */
-    public ShoppingCert(HashMap<Product, Integer> productCert, HashMap<Movie, Integer> movieCert) {
-        this.productCert = productCert;
-        this.movieCert = movieCert;
+    public ShoppingCart(HashMap<Product, Integer> productCart, HashMap<Movie, Integer> movieCart) {
+        this.productCart = productCart;
+        this.movieCart = movieCart;
     }
 
     /**
@@ -40,8 +40,8 @@ public class ShoppingCert {
      * @param product : product to add to the shopping cart
      */
     public void addProduct(Product product) {
-        int productCount = productCert.getOrDefault(product, 0);
-        productCert.put(product, productCount + 1);
+        int productCount = productCart.getOrDefault(product, 0);
+        productCart.put(product, productCount + 1);
     }
 
     /**
@@ -51,8 +51,8 @@ public class ShoppingCert {
      * @param quantity : quantity of the product to add to the shopping cart
      */
     public void addProduct(Product product, int quantity) {
-        int productCount = productCert.getOrDefault(product, 0);
-        productCert.put(product, productCount + quantity);
+        int productCount = productCart.getOrDefault(product, 0);
+        productCart.put(product, productCount + quantity);
     }
 
     /**
@@ -60,8 +60,8 @@ public class ShoppingCert {
      *
      * @return the products in the shopping cart in Map
      */
-    public Map<Product, Integer> getProductCert() {
-        return productCert;
+    public Map<Product, Integer> getProductCart() {
+        return productCart;
     }
 
     /**
@@ -70,8 +70,8 @@ public class ShoppingCert {
      * @param movie : movie to add to the shopping cart
      */
     public void addMovie(Movie movie) {
-        int movieCount = movieCert.getOrDefault(movie, 0);
-        movieCert.put(movie, movieCount + 1);
+        int movieCount = movieCart.getOrDefault(movie, 0);
+        movieCart.put(movie, movieCount + 1);
     }
 
     /**
@@ -81,8 +81,8 @@ public class ShoppingCert {
      * @param quantity : quantity of the movie to add to the shopping cart
      */
     public void addMovie(Movie movie, int quantity) {
-        int movieCount = movieCert.getOrDefault(movie, 0);
-        movieCert.put(movie, movieCount + quantity);
+        int movieCount = movieCart.getOrDefault(movie, 0);
+        movieCart.put(movie, movieCount + quantity);
     }
 
     /**
@@ -90,54 +90,54 @@ public class ShoppingCert {
      *
      * @return the movies in the shopping cart in Map
      */
-    public Map<Movie, Integer> getMovieCert() {
-        return movieCert;
+    public Map<Movie, Integer> getMovieCart() {
+        return movieCart;
     }
 
     /**
      * Clear all shopping cart
      */
-    public void clearAllCert() {
-        productCert.clear();
-        movieCert.clear();
+    public void clearAllCart() {
+        productCart.clear();
+        movieCart.clear();
     }
 
     /**
      * clear the shopping cart of products
      */
-    public void clearProductCert() {
-        productCert.clear();
+    public void clearProductCart() {
+        productCart.clear();
     }
 
     /**
      * clear the shopping cart of movies
      */
-    public void clearMovieCert() {
-        movieCert.clear();
+    public void clearMovieCart() {
+        movieCart.clear();
     }
     
     /**
      * Remove a product from the shopping cart by decreasing the quantity by the number passed into the method
      * If the quantity of the product is smaller than or equal to 0 after the quantity is decreased, remove the product from the shopping cart<br>
      * <strong>Note: If movie and product are modified so that they have the same parent class, this method can be refactored not to use generics</strong>
-     * @param objectInCert the type of the product, either Product or Movie
-     * @param cert the shopping cart of the product
+     * @param objectInCart the type of the product, either Product or Movie
+     * @param Cart the shopping cart of the product
      * @param quantity the quantity of the product to remove
      * @return empty if the product is not in the shopping cart, otherwise return the quantity of the product before removing
      * @param <T> the type of the product, either Product or Movie
      */
-    public <T> Optional<Integer> removeCert(T objectInCert, Map<T, Integer> cert, int quantity) {
-        Integer certCount = cert.get(objectInCert);
-        if (certCount == null) {
+    public <T> Optional<Integer> removeCart(T objectInCart, Map<T, Integer> Cart, int quantity) {
+        Integer CartCount = Cart.get(objectInCart);
+        if (CartCount == null) {
             return Optional.empty();
         }
-        int newCertCount = certCount - quantity;
-        if (newCertCount <= 0) {
-            cert.remove(objectInCert);
+        int newCartCount = CartCount - quantity;
+        if (newCartCount <= 0) {
+            Cart.remove(objectInCart);
         } else {
-            cert.put(objectInCert, newCertCount);
+            Cart.put(objectInCart, newCartCount);
         }
-        return Optional.of(certCount);
+        return Optional.of(CartCount);
     }
 
 }
