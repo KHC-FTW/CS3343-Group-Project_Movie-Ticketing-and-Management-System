@@ -49,7 +49,7 @@ public class Movie{
 	public String getClassification() {return classification;}
 	public String getLanguage() {return language;}
 	public String getSubtitles() {return subtitles;}
-	public List<MovieSession> getMovieSession() {return movieSessions;}
+	public List<MovieSession> getMovieSessionList() {return movieSessions;}
 
 	public static String displayMovieInfoHeaderForCustomer() {
 		StringBuilder result = new StringBuilder(String.format("%-5s", " "));

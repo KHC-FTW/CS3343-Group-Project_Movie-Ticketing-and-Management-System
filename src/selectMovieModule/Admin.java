@@ -1,73 +1,33 @@
 package selectMovieModule;
 
-public class Admin extends User{
-	
-	private String userName;
-	private String password;
+import java.util.Map;
 
-	public static Admin getDummyAdmin(){
-		return new Admin("dummyAdmin", "password");
-	}
+import Product.Product;
 
-	public Admin(String userName, String password) {
-		this.userName = userName;
-		this.password = password;
-	}
-	
-	public String getUserName() {return userName;}
-	public String getPassword() {return password;}
+public class Admin extends RegisteredUser{
+		
+	private Admin() {super("admin", "password");}
+	private static final Admin admin = new Admin();
+	public static Admin getInstance() {return admin;}
 	
 	@Override
-	public String listMovies() throws CustomException{
-		CinemaDatabase cinemaDatabase = CinemaDatabase.getInstance();
-		StringBuilder result = new StringBuilder("The following movies are found in the database: \n\n");
-		result.append(Movie.displayMovieInfoHeaderForAdmin());
-		int count = 0;
-		for (Movie movie : cinemaDatabase.getMovies()) {
-			count++;
-			result.append(movie.displayMovieInfoForAdmin(count)).append("\n");
-		}
-		if (count == 0) {
-			throw new CustomException("There are no movies found in the database.");
-		}
-		return result.toString();
+	public Map<Integer, Movie> listMovies() throws CustomException{
+		return super.movieService.getAllMoviesAdmin();
 	}
 	
 	@Override
-	public String searchMovieByName(String name) throws CustomException {
-		name = name.strip().toLowerCase();
-		CinemaDatabase cinemaDatabase = CinemaDatabase.getInstance();
-		StringBuilder result = new StringBuilder("The search results are as follows: \n\n");
-		result.append(Movie.displayMovieInfoHeaderForAdmin());
-		int count = 0;
-		for (Movie movie : cinemaDatabase.getMovies()) {
-			if (movie.getName().toLowerCase().contains(name)) {
-				count++;
-				result.append(movie.displayMovieInfoForAdmin(count)).append("\n");
-			}
-		}
-		if (count == 0) {
-			throw new CustomException("There are no movies matched with the search keyword.");
-		}
-		return result.toString();
+	public Map<Integer, Movie> searchMovies(String name) throws CustomException {
+		return super.movieService.searchMoviesAdmin(name);
 	}
 	
-	@Override
-	public String searchMovieByGenre(String genre) throws CustomException {
-		genre = genre.strip().toLowerCase();
-		CinemaDatabase cinemaDatabase = CinemaDatabase.getInstance();
-		StringBuilder result = new StringBuilder("The search results are as follows: \n\n");
-		result.append(Movie.displayMovieInfoHeaderForAdmin());
-		int count = 0;
-		for (Movie movie : cinemaDatabase.getMovies()) {
-			if (movie.getGenre().toLowerCase().equals(genre)) {
-				count++;
-				result.append(movie.displayMovieInfoForAdmin(count)).append("\n");
-			}
+	public void addItem(Object item) {
+		//TODO: add item to the database
+		if (item instanceof Movie) {
+			return;
 		}
-		if (count == 0) {
-			throw new CustomException("There are no movies matched with the search keyword.");
+		if (item instanceof Product) {
+			return;
 		}
-		return result.toString();
 	}
+	
 }

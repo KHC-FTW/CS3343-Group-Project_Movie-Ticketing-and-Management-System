@@ -166,7 +166,7 @@ public class CinemaSystem{
 	
 	private static SeatingPlan dummy_userInputSeatSelection(Customer customer, Scanner getInput) throws CustomException {
 		boolean selectSeatAgain = false;
-		SeatingPlan seatingPlan = customer.getCachedSelectedMovieSession().getSeats();
+		SeatingPlan seatingPlan = customer.getCachedMovieSession().getSeats();
 		
 		do {
 			int bookedCnt = 0;
@@ -246,16 +246,16 @@ public class CinemaSystem{
 			System.out.print("NOTE: This part depends on the payment module. The current version is a dummy demo only.\n> ");
 			paymentStatus = getInput.nextLine().strip();
 			if (paymentStatus.equals("1")){
-				String movie = customer.getCachedSelectedMovieSession().getMovie().getName();
-				MovieSession movieSession = customer.getCachedSelectedMovieSession();
+				String movie = customer.getCachedMovieSession().getMovie().getName();
+				MovieSession movieSession = customer.getCachedMovieSession();
 				System.out.println("All seats have been booked successfully for \"" + movie + "\" of " + movieSession.displayBasicInfo() + ". Thank you!");
-				customer.clearCachedSelectedSeats();
-				customer.clearCachedSelectedMovieSession();
+				customer.clearCachedSeats();
+				customer.clearCachedMovieSession();
 				return;
 			}else if (paymentStatus.equals("2")){
 				System.out.println(customer.undoBookSeats());
-				customer.clearCachedSelectedMovieSession();
-				customer.clearCachedSelectedSeats();
+				customer.clearCachedMovieSession();
+				customer.clearCachedSeats();
 				return;
 			}else{
 				System.out.println("Invalid input. Please try again.");
