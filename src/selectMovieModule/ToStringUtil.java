@@ -41,6 +41,78 @@ public class ToStringUtil {
 	}
 	
 	/**
+	 * Show movie sessions.
+	 *
+	 * @param movieSessions the movie sessions
+	 * @return the string
+	 * @throws CustomException the custom exception
+	 */
+	public static String showMovieSessions(Map<Integer, MovieSession> movieSessions) throws CustomException {
+		if (movieSessions.isEmpty()) {
+			throw new CustomException("No movie sessions available.");
+		}
+		StringBuilder result = new StringBuilder("The following sessions of \"")
+									.append(movieSessions.get(0).getMovie().getName())
+									.append("\" are available: \n");
+		
+		for (Integer key : movieSessions.keySet()) {
+			result.append(String.format("%3d)%-1s", key, " "))
+					.append(movieSessions.get(key).displayBasicInfo())
+					.append("\n");
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * Show seating plan.
+	 *
+	 * @param seatingPlan the seating plan
+	 * @return the string
+	 */
+	public static String showSeatingPlan(SeatingPlan seatingPlan) {
+		final String ANSI_RED = "\u001B[31m";
+		final String ANSI_GREEN = "\u001B[32m";
+		final String ANSI_RESET = "\u001B[0m";
+		final String bookedSymbol = seatingPlan.getBookedSymbol();
+		StringBuilder result = new StringBuilder("Seating Plan: (")
+								.append("Seating Plan: (").append(ANSI_GREEN).append("\"O\" = available; ")
+								.append(ANSI_RED).append("\"X\" = unavailable").append(ANSI_RESET).append(")\n\n")
+								.append(showScreen(seatingPlan)).append(" ".repeat(4));
+		char row = 'A';
+		for (String seat : seatingPlan.getSeatingPlan().get(0)) {
+			result.append(String.format("%4s", String.valueOf(row++)));
+		}
+        result.append("\n");
+        for (int i = 0; i < seatingPlan.getRows(); i++) {
+			for (int j = 0; j < seatingPlan.getColumns(); j++) {
+				if (j == 0) result.append(String.format("%4d", i + 1));
+				String currSeat = seatingPlan.getSeatingPlan().get(i).get(j);
+				if (currSeat.equals(bookedSymbol)) {
+					result.append(ANSI_RED).append(String.format("%4s", currSeat)).append(ANSI_RESET);
+				}else{
+					result.append(ANSI_GREEN).append(String.format("%4s", currSeat)).append(ANSI_RESET);
+				}
+			}
+			result.append("\n");
+		}
+        return result.toString();
+	}
+	
+	/**
+	 * Show screen.
+	 *
+	 * @param seatingPlan the seating plan
+	 * @return the string
+	 */
+	private static String showScreen(SeatingPlan seatingPlan) {
+		int screenPadding = (4 * seatingPlan.getSeatingPlan().get(0).size() - " SCREEN ".length() - 3 ) / 2;
+		return new StringBuilder(" ".repeat(7))
+					.append("|").append("*".repeat(screenPadding))
+					.append(" SCREEN ").append("*".repeat(screenPadding - 1))
+					.append("|\n\n").toString();
+	}
+	
+	/**
 	 * Default movie info header.
 	 *
 	 * @return the string

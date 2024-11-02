@@ -2,13 +2,12 @@ package selectMovieModule;
 
 import java.util.*;
 
-public class Customer extends User{
-	private String userName;
-	private String password;
+public class Customer extends RegisteredUser{
 	private CustomerState state;
 	private int age;
 	private List<String> cachedSelectedSeats;
 	private MovieSession cachedSelectedMovieSession;
+	private final BookSeatService bookSeatService = BookSeatService.getInstance();
 
 	public static CustomerState customerStateForAge(int age) throws CustomException {
 		if (age >= 0 && age < 18) return Children.getInstance();
@@ -18,13 +17,11 @@ public class Customer extends User{
 	}
 	
 	public Customer(String userName, String password, int age) throws CustomException {
+		super(userName, password);
 		this.state = customerStateForAge(age);
-		this.userName = userName;
-		this.password = password;
+		this.age = age;
 	}
 	
-	public String getUserName() {return userName;}
-    public String getPassword() {return password;}
 	public int getAge(){return age;}
     public CustomerState getState() {return state;}
 	
@@ -55,86 +52,68 @@ public class Customer extends User{
         }
     }
 
-	public Map<String, Movie> getAvailableMovies() throws CustomException {
-		CinemaDatabase cinemaDatabase = CinemaDatabase.getInstance();
-		Map<String, Movie> queriedOptions = new LinkedHashMap<>();
-		int count = 0;
-		for (Movie movie : cinemaDatabase.getMovies()) {
-			if (movie.getMovieSession() != null) {
-				count++;
-				queriedOptions.put(String.valueOf(count), movie);
-			}
-		}
-		if (count == 0) {
-			throw new CustomException("Sorry! There are currently no movies scheduled for selection.");
-		}
-		return queriedOptions;
+	@Override
+	public Map<Integer, Movie> listMovies() throws CustomException {
+		return super.listMovies();
 	}
 	
-	public List<MovieSession> getMovieSessionsFromMovie(Map<String, Movie> queriedOptions, String input) throws CustomException {
-		if (!queriedOptions.containsKey(input)) {
-			throw new CustomException("Invalid input. Please select a valid movie option.");
-		}
-		return queriedOptions.get(input).getMovieSession();
+	@Override
+	public Map<Integer, Movie> searchMovies(String name) throws CustomException {
+		return super.searchMovies(name);
 	}
 	
-	public MovieSession getSelectedMovieSessionFromOptions(List<MovieSession> movieSessions, String input) {
-		int index = Integer.parseInt(input);
-		MovieSession selected = movieSessions.get(index-1);
-		this.addCachedSelectedMovieSession(selected);
-		return selected;
+	public Movie getSelectedMovie(Map<Integer, Movie> movies, int selected) throws CustomException {
+		return super.movieService.getSelectedMovie(movies, selected);
 	}
 	
-	public String bookSeat(String option) throws CustomException {
-		SeatingPlan seatingPlan = this.getCachedSelectedMovieSession().getSeats();
-		if (!seatingPlan.isSeatAvailable(option)) {
-			throw new CustomException("Seat \"" + option + "\" is not available.");
-		}
-		this.addCachedSelectedSeats(option);
-		return seatingPlan.bookSeat(option);
+	public Map<Integer, MovieSession> getMovieSessionsFromMovie(Movie movie) throws CustomException {
+		return super.movieService.getMovieSessions(movie);
+	}
+	
+	public MovieSession getSelectedMovieSession(Map<Integer, MovieSession> movieSessions, int selected)
+			throws CustomException {
+		return super.movieService.getSelectedMovieSession(movieSessions, selected);
+	}
+	
+	public boolean bookSeat(SeatingPlan seatingPlan, String option) throws CustomException {
+		return bookSeatService.bookSeat(seatingPlan, option);
+	}
+	
+	public boolean undoBookSeat(SeatingPlan seatingPlan, String option) throws CustomException {
+		return bookSeatService.releaseSeat(seatingPlan, option);
 	}
 
-	public String undoBookSeats() throws CustomException {
-		List<String> cachedSeats = getCachedSelectedSeats();
-		SeatingPlan seatingPlan = getCachedSelectedMovieSession().getSeats();
-		StringBuilder returnMsg = new StringBuilder("Due to payment failure:\n");
-		for (String seat: cachedSeats){
-			returnMsg.append(seatingPlan.releaseSeat(seat)).append("\n");
-		}
-		return returnMsg.toString();
-	}
-
-	public boolean addCachedSelectedSeats(String selectedSeats) {
+	public boolean cacheSelectedSeat(String seat) {
 		if (cachedSelectedSeats == null) cachedSelectedSeats = new ArrayList<>();
 		// make sure no duplicate seat will be added
-		if (cachedSelectedSeats.contains(selectedSeats)) return false;
+		if (cachedSelectedSeats.contains(seat)) return false;
 		else{
-			cachedSelectedSeats.add(selectedSeats);
+			cachedSelectedSeats.add(seat);
 			return true;
 		}
 	}
 
 	// Limit only one movie session to be cached
 	// if want to cache another session, must first process the first, clear it, before caching another session
-	public boolean addCachedSelectedMovieSession(MovieSession cachedSelectedMovieSession) {
+	public boolean cacheMovieSession(MovieSession movieSession) {
 		if (this.cachedSelectedMovieSession == null){
-			this.cachedSelectedMovieSession = cachedSelectedMovieSession;
+			this.cachedSelectedMovieSession = movieSession;
 			return true;
 		}else return false;
 	}
 	
-	public List<String> getCachedSelectedSeats() throws CustomException {
+	public List<String> getCachedSeats() throws CustomException {
 		if (cachedSelectedSeats == null) throw new CustomException("There are no cached selected seats.");
 		return cachedSelectedSeats;
 	}
 
-	public MovieSession getCachedSelectedMovieSession() throws CustomException {
+	public MovieSession getCachedMovieSession() throws CustomException {
 		if (cachedSelectedMovieSession == null) throw new CustomException("There are no cached movie session.");
 		return cachedSelectedMovieSession;
 	}
 
 	// avoid repeatedly calling this function when the cache is already null
-	public boolean clearCachedSelectedSeats() {
+	public boolean clearCachedSeats() {
 		if (cachedSelectedSeats != null) {
 			cachedSelectedSeats = null;
 			return true;
@@ -142,7 +121,7 @@ public class Customer extends User{
 	}
 
 	// avoid repeatedly calling this function when the cache is already null
-	public boolean clearCachedSelectedMovieSession() {
+	public boolean clearCachedMovieSession() {
 		if (cachedSelectedMovieSession != null){
 			cachedSelectedMovieSession = null;
 			return true;
@@ -151,7 +130,7 @@ public class Customer extends User{
 
 	@Override
 	public String toString() {
-		return "Customer: " + userName + ", state: " + state.toString() + ", age: " + age;
+		return "Customer: " + super.getUserName() + ", state: " + state.toString() + ", age: " + age;
 	}
 
 }

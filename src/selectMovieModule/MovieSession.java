@@ -31,18 +31,8 @@ public class MovieSession {
 	public SeatingPlan getSeats() {return seats;}
 	
 	public String displayBasicInfo() {
-		return "house: " + house.getHouseNumber() + ", show time: " + showTime;
+		return "House: " + house.getHouseNumber() + ", Show Time: " + showTime;
 	}
 
-	public static String displayMovieSessions(List<MovieSession> movieSessions) {
-		StringBuilder result = new StringBuilder("The following sessions of \"")
-				.append(movieSessions.get(0).getMovie().getName())
-				.append("\" are available: \n");
-		int count = 0;
-		for (MovieSession movieSession : movieSessions) {
-			count++;
-			result.append(String.format("%3d)%-1s", count, " ") + movieSession.displayBasicInfo() + '\n');
-		}
-		return result.toString();
-	}
+	
 }
