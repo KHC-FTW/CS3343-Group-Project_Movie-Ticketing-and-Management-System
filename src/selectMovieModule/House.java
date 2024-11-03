@@ -1,18 +1,19 @@
 package selectMovieModule;
+import java.util.ArrayList;
 import java.util.List;
 
-public class House implements Cloneable{
-	private String houseNumber;
+public class House implements Comparable<House>{
+	private int houseNumber;
 	private final SeatingPlan defaultSeatingPlan;
 	private List<MovieSession> movieSessions;
 
 	
 	public House() throws CustomException {
 		this.defaultSeatingPlan = new SeatingPlan();
-		this.houseNumber = "houseNum";
+		this.houseNumber = 0;
 	}
 	
-	public House(String roomNumber, int rows, int columns) throws CustomException {
+	public House(int roomNumber, int rows, int columns) throws CustomException {
 		this.defaultSeatingPlan = new SeatingPlan(rows, columns);
 		this.houseNumber = roomNumber;
 	}
@@ -25,8 +26,30 @@ public class House implements Cloneable{
 		}
 	}
 
-	public String getHouseNumber() {
+	public int getHouseNumber() {
 		return this.houseNumber;
+	}
+	
+	public List<MovieSession> addMovieSession(MovieSession movieSession) {
+		if (movieSessions == null) {
+			movieSessions = new ArrayList<>();
+		}
+		movieSessions.add(movieSession);
+		return movieSessions;
+	}
+	
+	public List<MovieSession> getMovieSessions() {
+        return movieSessions;
+    }
+
+	@Override
+	public int compareTo(House other) {
+		return Integer.compare(this.houseNumber, other.getHouseNumber());
+	}
+	
+	@Override
+	public String toString() {
+		return "House number: " + houseNumber;
 	}
 	
 //	@Override
