@@ -18,12 +18,21 @@ public class Guest extends User{
 		return super.searchMovies(name);
 	}
 	
-	public User register(String userName, String password, int age) throws CustomException {
-		return new Customer(userName, password, age);
+	public RegisteredUser register(String userName, String password, int age) throws CustomException {
+		if (cinemaDatabase.getRegisteredUsers().containsKey(userName)) {
+			throw new CustomException("User with the name \"" + userName + "\" already exists.");
+		}
+		RegisteredUser newUser =  new Customer(userName, password, age);
+		cinemaDatabase.addRegisteredUser(newUser);
+		return newUser;
 	}
 	
-	public User login(String userName, String password) throws CustomException {
-		return new RegisteredUser(userName, password);
+	public RegisteredUser login(String userName, String password) throws CustomException {
+		RegisteredUser user = cinemaDatabase.findUser(userName);
+		if (!user.getPassword().equals(password)) {
+			throw new CustomException("Log in failed. Incorrect password.");
+		}
+		return user;
 	}
 	
 }

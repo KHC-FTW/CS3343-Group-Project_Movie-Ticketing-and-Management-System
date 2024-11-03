@@ -1,11 +1,9 @@
 package selectMovieModule;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import selectMovieModule.Movie;
 /**
  * The Class MovieService.
  */
@@ -60,11 +58,15 @@ public class MovieService {
 	 * @return the selected movie
 	 * @throws CustomException the custom exception
 	 */
-	public Movie getSelectedMovie(Map<Integer, Movie> movies, int selected) throws CustomException {
+	public Movie getSelectedMovie(Map<Integer, Movie> movies, int selected, Customer customer) throws CustomException {
 		if (!movies.containsKey(selected)) {
 			throw new CustomException("Invalid movie selection.");
 		}
-		return movies.get(selected);
+		Movie movie = movies.get(selected);
+		if (movie.getClassification().equals("III") && !customer.getState().canViewClassIIIMovies()) {
+			throw new CustomException("You are not allowed to watch class III movies.");
+		}
+		return movie;
 	}
 	
 	/**
@@ -128,7 +130,7 @@ public class MovieService {
 		}
 		Map<Integer, MovieSession> results = new LinkedHashMap<Integer, MovieSession>();
 		int count = 0;
-		for (MovieSession movieSession : movie.getMovieSessionList()) {
+		for (MovieSession movieSession : movieSessions) {
 			count++;
 			results.put(count, movieSession);
 		}

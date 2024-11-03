@@ -31,7 +31,7 @@ public class BookSeatService {
 	
 	private Boolean isSeatAvailable(SeatingPlan seatingPlan, String option) throws CustomException {
 		
-		if (option.length() != 2 || !Character.isAlphabetic(option.charAt(0)) || Character.isAlphabetic(option.charAt(1)))
+		if (option.length() < 2 || option.length() > 3 || !Character.isAlphabetic(option.charAt(0)) || Character.isAlphabetic(option.charAt(1)))
 			throw new CustomException("Invalid format for \"" + option + "\".");
 
 		int col = option.toLowerCase().charAt(0) - (int)'a';

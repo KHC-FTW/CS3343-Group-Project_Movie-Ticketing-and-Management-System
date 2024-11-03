@@ -1,11 +1,11 @@
 package selectMovieModule;
 
-import java.util.List;
 import java.util.Map;
 
 public class User{
 	
 	protected final MovieService movieService = MovieService.getInstance();
+	protected final CinemaDatabase cinemaDatabase = CinemaDatabase.getInstance();
 	
 	public Map<Integer, Movie> listMovies() throws CustomException {
 		return movieService.getAllScheduledMovies();

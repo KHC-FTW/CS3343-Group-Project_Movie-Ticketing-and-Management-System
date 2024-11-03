@@ -52,7 +52,7 @@ public class ToStringUtil {
 			throw new CustomException("No movie sessions available.");
 		}
 		StringBuilder result = new StringBuilder("The following sessions of \"")
-									.append(movieSessions.get(0).getMovie().getName())
+									.append(movieSessions.get(1).getMovie().getName())
 									.append("\" are available: \n");
 		
 		for (Integer key : movieSessions.keySet()) {
@@ -96,6 +96,25 @@ public class ToStringUtil {
 			result.append("\n");
 		}
         return result.toString();
+	}
+	
+	public static String showMovieSessionV1(Movie movie) {
+		List<MovieSession> movieSessions = movie.getMovieSessionList();
+		StringBuilder result = new StringBuilder("The following sessions of \"")
+                .append(movie.getName()).append("\" are available: \n");
+		for (MovieSession movieSession : movieSessions) {
+			result.append(movieSession.displayBasicInfo()).append("\n");
+		}
+		return result.toString();
+	}
+	
+	public static String showMovieSessionV2(Movie movie) {
+		List<MovieSession> movieSessions = movie.getMovieSessionList();
+		StringBuilder result = new StringBuilder();
+		for (MovieSession movieSession : movieSessions) {
+			result.append(movieSession).append("\n");
+		}
+		return result.toString();
 	}
 	
 	/**
@@ -157,7 +176,6 @@ public class ToStringUtil {
 		        .append(String.format("%-8s", movie.getClassification()))
 		        .append(String.format("%-12s", movie.getLanguage()))
 		        .append(String.format("%-12s", movie.getSubtitles()))
-		        .append("\n")
 		        .toString();
 	}
 	

@@ -63,7 +63,7 @@ public class Customer extends RegisteredUser{
 	}
 	
 	public Movie getSelectedMovie(Map<Integer, Movie> movies, int selected) throws CustomException {
-		return super.movieService.getSelectedMovie(movies, selected);
+		return super.movieService.getSelectedMovie(movies, selected, this);
 	}
 	
 	public Map<Integer, MovieSession> getMovieSessionsFromMovie(Movie movie) throws CustomException {
