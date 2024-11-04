@@ -56,7 +56,7 @@ public class PaymentRecordTest {
     @BeforeEach
     void setUp() throws CustomException {
         Customer customer = new CustomerStub("John", "Doe", 100);
-        List<Movie> movieList = List.of(new Movie("movie1", "action", 123, 100, "I", "English", "English"));
+        List<Movie> movieList = List.of(new Movie("movie1", "action", 123, 100, 100, "I", "English", "English"));
         List<Product> productList = List.of(new Snack("snack1", 10, "100g"));
         paymentRecord = new PaymentRecord(customer,
                 productList,
@@ -69,7 +69,7 @@ public class PaymentRecordTest {
         Assertions.assertEquals("John", paymentRecord.customer().getUserName());
         Assertions.assertEquals("Doe", paymentRecord.customer().getPassword());
         Assertions.assertEquals(100, paymentRecord.customer().getAge());
-        Movie movie = new Movie("movie1", "action", 123, 100, "I", "English", "English");
+        Movie movie = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
         Assertions.assertEquals(movie, paymentRecord.movieList().getFirst());
         Assertions.assertTrue(paymentRecord.payment().equals(new PaymentStub()));
 
@@ -81,7 +81,7 @@ public class PaymentRecordTest {
         Assertions.assertEquals("John", allRecord.getFirst().customer().getUserName());
         Assertions.assertEquals("Doe", allRecord.getFirst().customer().getPassword());
         Assertions.assertEquals(100, allRecord.getFirst().customer().getAge());
-        Movie movie = new Movie("movie1", "action", 123, 100, "I", "English", "English");
+        Movie movie = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
         Assertions.assertEquals(movie, allRecord.getFirst().movieList().getFirst());
         Assertions.assertTrue(allRecord.getFirst().payment().equals(new PaymentStub()));
     }
