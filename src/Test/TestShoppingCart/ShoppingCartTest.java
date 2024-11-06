@@ -30,8 +30,8 @@ public class ShoppingCartTest {
                 testSnack, 1,
                 testDrink, 1
         );
-        testMovie1 = new Movie("movie1", "action", 123, 100, "I", "English", "English");
-        testMovie2 = new Movie("movie2", "horror", 111, 123, "IIA", "Chinese", "Chinese");
+        testMovie1 = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
+        testMovie2 = new Movie("movie2", "horror", 111, 123, 100, "IIA", "Chinese", "Chinese");
         Map<Movie, Integer> movieMap = Map.of(testMovie1, 1, testMovie2, 1);
         productCart = new HashMap<>(productMap);
         movieCart = new HashMap<>(movieMap);
@@ -74,7 +74,7 @@ public class ShoppingCartTest {
 
     @Test
     void testAddMovie() {
-        Movie movie = new Movie("movie3", "comedy", 100, 120, "IIB", "Chinese", "Chinese");
+        Movie movie = new Movie("movie3", "comedy", 100, 120, 100, "IIB", "Chinese", "Chinese");
         shoppingCart.addMovie(movie);
         movieCart.put(movie, 1);
         Assertions.assertEquals(movieCart, shoppingCart.getMovieCart());
@@ -104,7 +104,7 @@ public class ShoppingCartTest {
 
     @Test
     void testAddMovieWithQuantity() {
-        Movie movie = new Movie("movie3", "comedy", 100, 120, "IIB", "Chinese", "Chinese");
+        Movie movie = new Movie("movie3", "comedy", 100, 120, 100, "IIB", "Chinese", "Chinese");
         shoppingCart.addMovie(movie, 3);
         movieCart.put(movie, 3);
         Assertions.assertEquals(movieCart, shoppingCart.getMovieCart());
@@ -159,7 +159,7 @@ public class ShoppingCartTest {
         Assertions.assertTrue(quantity.isPresent());
         Assertions.assertEquals(null, shoppingCart.getProductCart().get(testSnack));
     }
-    
+
     @Test
     void testRemoveMovie() {
         for (int i = 0; i < 9; i++) {
@@ -169,20 +169,20 @@ public class ShoppingCartTest {
         Assertions.assertTrue(quantity.isPresent());
         Assertions.assertEquals(1, shoppingCart.getMovieCart().get(testMovie1));
     }
-    
+
     @Test
     void testRemoveMovie_MovieNotExists() {
-        Movie movie = new Movie("movie3", "comedy", 100, 120, "IIB", "Chinese", "Chinese");
+        Movie movie = new Movie("movie3", "comedy", 100, 120, 100, "IIB", "Chinese", "Chinese");
         Optional<Integer> quantity = shoppingCart.removeCart(movie, shoppingCart.getMovieCart(), 1);
         Assertions.assertTrue(quantity.isEmpty());
     }
-    
+
     @Test
     void testRemoveMovie_NoMoreMovie() {
         Optional<Integer> quantity = shoppingCart.removeCart(testMovie1, shoppingCart.getMovieCart(), 1);
         Assertions.assertTrue(quantity.isPresent());
         Assertions.assertEquals(null, shoppingCart.getMovieCart().get(testMovie1));
-        
+
     }
-    
+
 }
