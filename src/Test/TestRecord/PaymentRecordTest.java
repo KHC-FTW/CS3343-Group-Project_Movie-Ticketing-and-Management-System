@@ -15,44 +15,74 @@ import selectMovieModule.Movie;
 
 import java.util.List;
 
+/**
+ * PaymentRecordTest class that contains the test cases for PaymentRecord class
+ */
 public class PaymentRecordTest {
     PaymentRecord paymentRecord;
 
+    /**
+     * PaymentStub class that implements Payment interface for testing purposes
+     */
     class PaymentStub implements Payment {
         /**
-         * @param price
-         * @return
+         * @param price price of the product
+         * @return false to simulate the payment process
          */
         @Override
-        public boolean doPayment(int price) {
+        public boolean doPayment(double price) {
             return false;
         }
 
         /**
-         * @return
+         * Get the payment type
+         * @return null for testing purposes
          */
         @Override
         public PaymentType getPaymentType() {
             return null;
         }
 
+        /**
+         * Check if the payment is equal to another object
+         * @param obj object to compare
+         * @return always true for testing purposes
+         */
         @Override
         public boolean equals(Object obj) {
             return true;
         }
     }
 
+    /**
+     * CustomerStub class that extends Customer class for testing purposes
+     */
     class CustomerStub extends Customer {
+        /**
+         * Constructor for CustomerStub class
+         * @param userName username of the customer
+         * @param password password of the customer
+         * @param age age of the customer
+         * @throws CustomException if the age is invalid
+         */
         public CustomerStub(String userName, String password, int age) throws CustomException {
             super(userName, password, age);
         }
 
+        /**
+         * Get the age of the customer
+         * @return 100 for testing purposes
+         */
         @Override
         public int getAge() {
             return 100;
         }
     }
 
+    /**
+     * Set up the test environment
+     * @throws CustomException if the age is invalid
+     */
     @BeforeEach
     void setUp() throws CustomException {
         Customer customer = new CustomerStub("John", "Doe", 100);
@@ -64,6 +94,9 @@ public class PaymentRecordTest {
                 new PaymentStub());
     }
 
+    /**
+     * Test the payment record, get the customer, movie list and payment and assert them
+     */
     @Test
     void testPaymentRecord() {
         Assertions.assertEquals("John", paymentRecord.customer().getUserName());
@@ -75,6 +108,9 @@ public class PaymentRecordTest {
 
     }
 
+    /**
+     * Test the get all record method, get all the payment records and assert them
+     */
     @Test
     void testGetAllRecord() {
         List<PaymentRecord> allRecord = PaymentRecord.getAllRecord();

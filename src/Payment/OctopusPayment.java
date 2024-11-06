@@ -22,7 +22,7 @@ public class OctopusPayment implements Payment {
      * @return true if the payment is successful, false otherwise
      */
     @Override
-    public boolean doPayment(int price) {
+    public boolean doPayment(double price) {
         System.out.println("Octopus Payment: $" + price);
         return octopusAPIFactory.getExternalAPI().doPayment(price);
     }

@@ -53,7 +53,7 @@ public class OctopusPaymentTest {
     public void testOctopusDoPayment() {
         class OctopusPaymentStub extends OctopusPayment {
             @Override
-            public boolean doPayment(int price) {
+            public boolean doPayment(double price) {
                 return true;
             }
         }
@@ -70,7 +70,7 @@ public class OctopusPaymentTest {
     public void testOctopusDoPayment_False() {
         class OctopusPaymentStub extends OctopusPayment {
             @Override
-            public boolean doPayment(int price) {
+            public boolean doPayment(double price) {
                 return false;
             }
         }
