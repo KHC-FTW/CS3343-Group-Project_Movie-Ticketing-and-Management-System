@@ -33,7 +33,7 @@ public class OctopusAPITest {
      */
     @Test
     public void testOctopusFactory() {
-        ExternalAPI octopusAPI = octopusAPIFactory.createExternalAPI();
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI();
         Assertions.assertTrue(octopusAPI instanceof OctopusAPI);
     }
     
@@ -43,7 +43,7 @@ public class OctopusAPITest {
      */
     @Test
     public void testOctopusFactory_Random(){
-        ExternalAPI octopusAPI = octopusAPIFactory.createExternalAPI(random);
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(random);
         Assertions.assertTrue(octopusAPI instanceof OctopusAPI);
     }
     
@@ -54,7 +54,7 @@ public class OctopusAPITest {
      */
     @Test
     public void testDoPayment(){
-        ExternalAPI octopusAPI = octopusAPIFactory.createExternalAPI(random);
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(random);
         Assertions.assertTrue(octopusAPI.doPayment(100));// random.nextInt(0, 100 * 2) = 113
     }
     
@@ -65,7 +65,7 @@ public class OctopusAPITest {
      */
     @Test
     public void testDoPayment_Fail(){
-        ExternalAPI octopusAPI = octopusAPIFactory.createExternalAPI(random);
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(random);
         Assertions.assertFalse(octopusAPI.doPayment(15));// random.nextInt(0, 15 * 2) = 3
     }
 }

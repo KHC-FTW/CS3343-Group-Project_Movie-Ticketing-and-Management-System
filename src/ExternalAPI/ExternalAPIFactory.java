@@ -11,11 +11,11 @@ public interface ExternalAPIFactory {
      * Create ExternalAPI object
      * @return ExternalAPI object
      */
-    ExternalAPI createExternalAPI();
+    ExternalAPI getExternalAPI();
     /**
      * Create ExternalAPI object with random object
      * @param random Random object to be used for testing
      * @return ExternalAPI object
      */
-    ExternalAPI createExternalAPI(Random random);
+    ExternalAPI getExternalAPI(Random random);
 }

@@ -12,7 +12,7 @@ public class OctopusAPIFactory implements ExternalAPIFactory {
      * @return OctopusAPI object for the octopus card API
      */
     @Override
-    public ExternalAPI createExternalAPI() {
+    public ExternalAPI getExternalAPI() {
         return new OctopusAPI();
     }
 
@@ -22,7 +22,7 @@ public class OctopusAPIFactory implements ExternalAPIFactory {
      * @return OctopusAPI object for the octopus card API
      */
     @Override
-    public ExternalAPI createExternalAPI(Random random) {
+    public ExternalAPI getExternalAPI(Random random) {
         return new OctopusAPI(random);
     }
 }
