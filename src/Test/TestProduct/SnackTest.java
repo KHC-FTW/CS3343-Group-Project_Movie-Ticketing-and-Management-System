@@ -1,4 +1,4 @@
-package Test.TestProduct;
+package TestProduct;
 
 import Product.Snack;
 import org.junit.jupiter.api.Assertions;
@@ -123,15 +123,7 @@ public class SnackTest {
     public void testGetPrice() {
         Assertions.assertEquals(10, snack1.getPrice());
     }
-
-    /**
-     * Test setPrice method
-     */
-    @Test
-    public void testSetPrice() {
-        double priceSet = snack1.setPrice(20);
-        Assertions.assertEquals(20, priceSet);
-    }
+    
 
     /**
      * Test getAllSnacks method

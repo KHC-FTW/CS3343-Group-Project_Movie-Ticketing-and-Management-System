@@ -82,16 +82,7 @@ public class DrinkTest {
         double price = testdrinkList.getFirst().getPrice();
         Assertions.assertEquals(price, 10);
     }
-
-    /**
-     * Test set price of the drink
-     */
-    @Test
-    void testSetPrice() {
-        testdrinkList.getFirst().setPrice(20);
-        double price = testdrinkList.getFirst().getPrice();
-        Assertions.assertEquals(price, 20);
-    }
+    
 
     /**
      * Test search drink

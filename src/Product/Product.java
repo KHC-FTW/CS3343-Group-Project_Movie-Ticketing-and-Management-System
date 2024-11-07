@@ -12,20 +12,7 @@ public interface Product {
      */
     String getName();
 
-    /**
-     * get the portion of the product
-     *
-     * @return the portion of the product
-     */
-    String getPortion();
 
-    /**
-     * set the portion of the product, and return the portion set
-     *
-     * @param portion portion of the product
-     * @return the portion of the product set
-     */
-    String setPortion(String portion);
 
     /**
      * get the price of the product
@@ -33,14 +20,7 @@ public interface Product {
      * @return the price of the product
      */
     double getPrice();
-
-    /**
-     * set the price of the product, and return the price set
-     *
-     * @param price price of the product
-     * @return the price of the product set
-     */
-    double setPrice(double price);
+    
 
     /**
      * compare the product with another object
