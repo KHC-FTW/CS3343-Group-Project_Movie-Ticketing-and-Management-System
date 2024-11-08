@@ -52,4 +52,50 @@ public class MovieTicketTest {
         Assertions.assertEquals(movieTicket.getSeat(), setSeat);
     }
 
+    @Test
+void  testHashCode() {
+    MovieTicket movieTicket1 = new MovieTicket(movie, movieSession, "A1");
+    Assertions.assertEquals(movieTicket.hashCode(), movieTicket1.hashCode());
+}
+
+    @Test
+    void testEquals() {
+        MovieTicket movieTicket1 = new MovieTicket(movie, movieSession, "A1");
+        Assertions.assertEquals(movieTicket, movieTicket1);
+    }
+    
+    @Test
+    void testEquals_sameObject() {
+        Assertions.assertEquals(movieTicket, movieTicket);
+    }
+    
+    @Test
+    void testEquals_Null() {
+        Assertions.assertNotEquals(movieTicket, null);
+    }
+    
+    @Test
+    void testEquals_differentClass() {
+        Assertions.assertFalse(movieTicket.equals(movie));
+    }
+    
+    @Test
+    void testEquals_differentMovie(){
+        Movie movie1 = new Movie("test_movie1", "testing", 999, 999, 10, "I", "English", "English");
+        MovieTicket movieTicket1 = new MovieTicket(movie1, movieSession, "A1");
+        Assertions.assertNotEquals(movieTicket, movieTicket1);
+    }
+    
+    @Test
+    void testEquals_differentMovieSession() throws CustomException {
+        MovieSession movieSession1 = new MovieSession(movie, "11:00", "12:00", new House());
+        MovieTicket movieTicket1 = new MovieTicket(movie, movieSession1, "A1");
+        Assertions.assertNotEquals(movieTicket, movieTicket1);
+    }
+    
+    @Test
+    void testEquals_differentSeat() {
+        MovieTicket movieTicket1 = new MovieTicket(movie, movieSession, "A2");
+        Assertions.assertNotEquals(movieTicket, movieTicket1);
+    }
 }

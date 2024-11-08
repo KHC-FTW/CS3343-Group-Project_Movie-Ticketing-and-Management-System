@@ -3,6 +3,8 @@ package Product;
 import selectMovieModule.Movie;
 import selectMovieModule.MovieSession;
 
+import java.util.Objects;
+
 public class MovieTicket implements Product {
     /**
      * Constructor for MovieTicket class
@@ -73,4 +75,32 @@ public class MovieTicket implements Product {
         return this.seat;
     }
 
+    /**
+     * check if the movie ticket is equal to another movie ticket
+     *
+     * @param o another movie ticket
+     * @return true if the movie ticket is equal to another movie ticket
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MovieTicket that = (MovieTicket) o;
+        return Objects.equals(movie, that.movie) && movieSession.compareTo(that.movieSession) == 0 && Objects.equals(
+                seat, that.seat);
+    }
+
+    /**
+     * get the hash code of the movie ticket
+     *
+     * @return hash code of the movie ticket
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie, movieSession, seat);
+    }
 }
