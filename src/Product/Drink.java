@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * Drink class that implements Product interface
  */
-public class Drink implements Product {
+public class Drink implements ProductWithPortion {
     private final String name;
     private double price;
     private String portion;
@@ -72,18 +72,7 @@ public class Drink implements Product {
     public double getPrice() {
         return price;
     }
-
-    /**
-     * set the price of the drink, and return the price set
-     * @param price  price of the drink
-     * @return the price of the drink set
-     */
-    @Override
-    public double setPrice(double price) {
-        this.price = price;
-        return getPrice();
-    }
-
+    
     /**
      * search for a drink by name
      * @param name  name of the drink

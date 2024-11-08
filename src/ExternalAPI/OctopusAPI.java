@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class OctopusAPI implements ExternalAPI {
 
-    private Random random;
+    private final Random random;
 
     /**
      * Default constructor
@@ -19,6 +19,7 @@ public class OctopusAPI implements ExternalAPI {
 
     /**
      * Constructor with random object
+     *
      * @param random Random object to be used for testing
      */
     OctopusAPI(Random random) {
@@ -28,11 +29,12 @@ public class OctopusAPI implements ExternalAPI {
     /**
      * Simulate the payment process of the octopus card API
      * The payment is successful if the random number generated is greater than or equal to the price
+     *
      * @param price price of the product
      * @return true if the payment is successful, false otherwise
      */
     @Override
-    public boolean doPayment(int price) {
-        return random.nextInt(0, price * 2) >= price;
+    public boolean doPayment(double price) {
+        return random.nextInt(0, (int) price * 2) >= price;
     }
 }

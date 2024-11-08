@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Snack class that implements Product interface
+ * Snack class that implements ProductWithPortion interface
  */
-public class Snack implements Product {
+public class Snack implements ProductWithPortion {
     private final String name;
     private double price;
     private String portion;
@@ -109,18 +109,7 @@ public class Snack implements Product {
     public double getPrice() {
         return price;
     }
-
-    /**
-     * set the price of the snack, and return the price set
-     *
-     * @param price price of the snack
-     * @return the price of the snack set
-     */
-    @Override
-    public double setPrice(double price) {
-        this.price = price;
-        return getPrice();
-    }
+    
 
     /**
      * search for a snack by name
