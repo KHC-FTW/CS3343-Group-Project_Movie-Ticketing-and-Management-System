@@ -19,4 +19,6 @@ public interface Payment {
      * @return PaymentType of the payment method
      */
     PaymentType getPaymentType();
+    
+    PaymentStatus getPaymentStatus();
 }
