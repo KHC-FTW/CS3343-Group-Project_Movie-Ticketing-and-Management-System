@@ -1,17 +1,17 @@
 package TestRecord;
 
 import Payment.Payment;
+import Payment.PaymentStatus;
 import Record.PaymentRecord;
 import Product.Product;
 import Product.Snack;
+import Product.MovieTicket;
 import Payment.PaymentType;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import selectMovieModule.CustomException;
-import selectMovieModule.Customer;
-import selectMovieModule.Movie;
+import selectMovieModule.*;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class PaymentRecordTest {
 
         /**
          * Get the payment type
+         *
          * @return null for testing purposes
          */
         @Override
@@ -44,7 +45,16 @@ public class PaymentRecordTest {
         }
 
         /**
+         * @return 
+         */
+        @Override
+        public PaymentStatus getPaymentStatus() {
+            return null;
+        }
+
+        /**
          * Check if the payment is equal to another object
+         *
          * @param obj object to compare
          * @return always true for testing purposes
          */
@@ -60,9 +70,10 @@ public class PaymentRecordTest {
     class CustomerStub extends Customer {
         /**
          * Constructor for CustomerStub class
+         *
          * @param userName username of the customer
          * @param password password of the customer
-         * @param age age of the customer
+         * @param age      age of the customer
          * @throws CustomException if the age is invalid
          */
         public CustomerStub(String userName, String password, int age) throws CustomException {
@@ -71,6 +82,7 @@ public class PaymentRecordTest {
 
         /**
          * Get the age of the customer
+         *
          * @return 100 for testing purposes
          */
         @Override
@@ -79,18 +91,25 @@ public class PaymentRecordTest {
         }
     }
 
+    private MovieTicket movieTicket;
+
     /**
      * Set up the test environment
+     *
      * @throws CustomException if the age is invalid
      */
     @BeforeEach
     void setUp() throws CustomException {
         Customer customer = new CustomerStub("John", "Doe", 100);
-        List<Movie> movieList = List.of(new Movie("movie1", "action", 123, 100, 100, "I", "English", "English"));
+        Movie movie = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
+        MovieSession movieSession = new MovieSession(movie, "11:00", "12:00", new House());
+
+        movieTicket = new MovieTicket(movie, movieSession, "A1");
+        List<MovieTicket> movieTicketList = List.of(movieTicket);
         List<Product> productList = List.of(new Snack("snack1", 10, "100g"));
         paymentRecord = new PaymentRecord(customer,
                 productList,
-                movieList,
+                movieTicketList,
                 new PaymentStub());
     }
 
@@ -103,7 +122,7 @@ public class PaymentRecordTest {
         Assertions.assertEquals("Doe", paymentRecord.customer().getPassword());
         Assertions.assertEquals(100, paymentRecord.customer().getAge());
         Movie movie = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
-        Assertions.assertEquals(movie, paymentRecord.movieList().getFirst());
+        Assertions.assertEquals(movieTicket, paymentRecord.movieTicketList().getFirst());
         Assertions.assertTrue(paymentRecord.payment().equals(new PaymentStub()));
 
     }
@@ -118,7 +137,7 @@ public class PaymentRecordTest {
         Assertions.assertEquals("Doe", allRecord.getFirst().customer().getPassword());
         Assertions.assertEquals(100, allRecord.getFirst().customer().getAge());
         Movie movie = new Movie("movie1", "action", 123, 100, 100, "I", "English", "English");
-        Assertions.assertEquals(movie, allRecord.getFirst().movieList().getFirst());
+        Assertions.assertEquals(movieTicket, allRecord.getFirst().movieTicketList().getFirst());
         Assertions.assertTrue(allRecord.getFirst().payment().equals(new PaymentStub()));
     }
 }
