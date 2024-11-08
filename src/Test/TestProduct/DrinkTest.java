@@ -119,7 +119,7 @@ public class DrinkTest {
      * Test equals method with different name of drink
      */
     @Test
-    void testEqualsDifferentName() {
+    void testEquals_DifferentName() {
         Drink drink1 = testdrinkList.getFirst();
         Drink drink2 = new Drink("Drink 2", 10, "10ml");
         Assertions.assertFalse(drink1.equals(drink2));
@@ -130,7 +130,7 @@ public class DrinkTest {
      * Test equals method with different price of drink
      */
     @Test
-    void testEqualsDifferentPrice() {
+    void testEquals_DifferentPrice() {
         Drink drink1 = testdrinkList.getFirst();
         Drink drink2 = new Drink("Drink 1", 20, "10ml");
         Assertions.assertFalse(drink1.equals(drink2));
@@ -141,7 +141,7 @@ public class DrinkTest {
      * Test equals method with different portion of drink
      */
     @Test
-    void testEqualsDifferentPortion() {
+    void testEquals_DifferentPortion() {
         Drink drink1 = testdrinkList.getFirst();
         Drink drink2 = new Drink("Drink 1", 10, "20ml");
         Assertions.assertFalse(drink1.equals(drink2));
@@ -152,7 +152,7 @@ public class DrinkTest {
      * Test equals method with null
      */
     @Test
-    void testEqualsNull() {
+    void testEquals_Null() {
         Drink drink1 = testdrinkList.getFirst();
         Assertions.assertFalse(drink1.equals(null));
         Assertions.assertNotEquals(drink1.hashCode(), 0);
@@ -162,7 +162,7 @@ public class DrinkTest {
      * Test equals method with different class
      */
     @Test
-    void testEqualsDifferentClass() {
+    void testEquals_DifferentClass() {
         Drink drink1 = testdrinkList.getFirst();
         Object obj = new Object();
         Assertions.assertFalse(drink1.equals(obj));
@@ -173,7 +173,7 @@ public class DrinkTest {
      * Test equals method on the same instance of drink
      */
     @Test
-    void testEqualsDrinkEqualsItself() {
+    void testEquals_DrinkEqualsItself() {
         Drink drink1 = testdrinkList.getFirst();
         Assertions.assertTrue(drink1.equals(drink1));
     }

@@ -1,6 +1,7 @@
 package TestPayment;
 
 import Payment.OctopusPaymentFactory;
+import Payment.PaymentStatus;
 import Payment.Payment;
 import Payment.OctopusPayment;
 import Payment.PaymentType;
@@ -36,7 +37,7 @@ public class OctopusPaymentTest {
 
     /**
      * Test the getPaymentType method in OctopusPayment class
-     * Create an OctopusPayment object and check if the payment type is PaymentType.OCTOPUS
+     * Create an OctopusPayment object and check if the payment type is PaymentType.OCTOPUS.
      */
     @Test
     public void testOctopusGetPaymentType() {
@@ -76,5 +77,15 @@ public class OctopusPaymentTest {
         }
         OctopusPayment octopusPayment = new OctopusPaymentStub();
         Assertions.assertFalse(octopusPayment.doPayment(100));
+    }
+    
+    /**
+     * Test the getPaymentStatus method in OctopusPayment class
+     * Create an OctopusPayment object and check if the payment status is PaymentStatus.NOT_PROCEED
+     */
+    @Test
+    public void testOctopusGetPaymentStatus() {
+        Payment octopusPayment = octopusPaymentFactory.createPaymentMethod();
+        Assertions.assertEquals(octopusPayment.getPaymentStatus(), PaymentStatus.NOT_PROCEED);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * PaymentRecord class that contains the payment record of a customer
- * The payment record contains the customer, products, movies and payment details
+ * The payment record contains the customer, products, movie tickets and payment details
  * The payment record is stored in a list of all payment records
  * The payment record is created when a customer makes a payment
  * The payment record is stored in record class, so that they cannot be modified once created
@@ -22,6 +22,13 @@ public record PaymentRecord(Customer customer, List<Product>productList, List<Mo
     // TODO: save the record to database
     private static List<PaymentRecord> allRecord = new ArrayList<>();
 
+    /**
+     * Constructor for PaymentRecord class
+     * @param customer : customer that made the payment
+     * @param productList : list of products bought
+     * @param movieTicketList : list of movie tickets bought
+     * @param payment : payment details
+     */
     public PaymentRecord(Customer customer, List<Product> productList, List<MovieTicket> movieTicketList, Payment payment) {
         this.customer = customer;
         this.productList = productList;
@@ -30,6 +37,10 @@ public record PaymentRecord(Customer customer, List<Product>productList, List<Mo
         allRecord.add(this);
     }
     
+    /**
+     * Get all payment records
+     * @return list of all payment records
+     */
     public static List<PaymentRecord> getAllRecord() {
         return allRecord;
     }

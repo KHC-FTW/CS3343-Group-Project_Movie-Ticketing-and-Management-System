@@ -45,7 +45,8 @@ public class PaymentRecordTest {
         }
 
         /**
-         * @return 
+         * Get the payment status 
+         * @return null for testing purposes
          */
         @Override
         public PaymentStatus getPaymentStatus() {

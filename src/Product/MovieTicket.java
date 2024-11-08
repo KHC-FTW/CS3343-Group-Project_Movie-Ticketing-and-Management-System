@@ -5,6 +5,9 @@ import selectMovieModule.MovieSession;
 
 import java.util.Objects;
 
+/**
+ * MovieTicket class that implements Product interface
+ */
 public class MovieTicket implements Product {
     /**
      * Constructor for MovieTicket class

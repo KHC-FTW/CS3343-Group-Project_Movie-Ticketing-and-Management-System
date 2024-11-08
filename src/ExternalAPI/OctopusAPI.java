@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class OctopusAPI implements ExternalAPI {
 
-    private Random random;
+    private final Random random;
 
     /**
      * Default constructor
