@@ -37,7 +37,7 @@ public class AlipayAPITest {
     public void testGetExternalAPI_Random_Num() {
         ExternalAPI externalAPI =  alipayAPIFactory.getExternalAPI(null);
         // Test if there is no NullPointerException
-        externalAPI.doPayment(1);
+        Assertions.assertDoesNotThrow(() -> externalAPI.doPayment(1));
         Assertions.assertNotNull(externalAPI);
         Assertions.assertTrue(externalAPI instanceof AlipayAPI);
     }

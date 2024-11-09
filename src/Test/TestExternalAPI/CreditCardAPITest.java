@@ -36,7 +36,7 @@ public class CreditCardAPITest {
     void testCreditCardAPIFactory_Random_Null() {
         ExternalAPI externalAPI = creditCardAPIFactory.getExternalAPI(null);
         // test when random is null, it should return CreditCardAPI object and can do payment without NullPointerException
-        externalAPI.doPayment(1);
+        Assertions.assertDoesNotThrow(() -> externalAPI.doPayment(1));
         Assertions.assertNotNull(externalAPI);
         Assertions.assertTrue(externalAPI instanceof CreditCardAPI);
     }    

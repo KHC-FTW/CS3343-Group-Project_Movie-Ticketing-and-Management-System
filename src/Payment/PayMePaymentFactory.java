@@ -2,26 +2,24 @@ package Payment;
 
 import ExternalAPI.ExternalAPI;
 
-/**
- * OctopusPaymentFactory class
- * It is used to create OctopusPayment object
- */
-public class OctopusPaymentFactory implements PaymentFactory {
+public class PayMePaymentFactory implements PaymentFactory {
+    /**
+     * @return Payment object of PayMePayment
+     */
     @Override
     public Payment createPaymentMethod() {
-        return new OctopusPayment();
+        return new PayMePayment();
     }
 
     /**
      * @param externalAPI ExternalAPI object to be used for payment 
-     * @return Payment object
+     * @return Payment object of PayMePayment
      */
     @Override
     public Payment createPaymentMethod(ExternalAPI externalAPI) {
         if (externalAPI == null) {
-            return new OctopusPayment();
+            return new PayMePayment();
         }
-        return new OctopusPayment(externalAPI);
+        return new PayMePayment(externalAPI);
     }
-
 }

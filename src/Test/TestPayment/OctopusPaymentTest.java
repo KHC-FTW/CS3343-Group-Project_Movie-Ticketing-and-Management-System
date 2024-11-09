@@ -1,5 +1,8 @@
 package TestPayment;
 
+import ExternalAPI.ExternalAPI;
+import ExternalAPI.ExternalAPIFactory;
+import ExternalAPI.OctopusAPIFactory;
 import Payment.OctopusPaymentFactory;
 import Payment.PaymentStatus;
 import Payment.Payment;
@@ -9,12 +12,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 /**
  * OctopusPaymentTest class
  * It is used to test the OctopusPayment class and OctopusPaymentFactory class
  */
 public class OctopusPaymentTest {
     OctopusPaymentFactory octopusPaymentFactory;
+    ExternalAPIFactory octopusAPIFactory;
 
     /**
      * Set up the test environment
@@ -22,6 +28,7 @@ public class OctopusPaymentTest {
      */
     @BeforeEach
     public void setUp() {
+        octopusAPIFactory = new OctopusAPIFactory();
         octopusPaymentFactory = new OctopusPaymentFactory();
     }
 
@@ -32,6 +39,21 @@ public class OctopusPaymentTest {
     @Test
     public void testOctopusPaymentFactory() {
         Payment payment = octopusPaymentFactory.createPaymentMethod();
+        Assertions.assertTrue(payment instanceof OctopusPayment);
+    }
+
+    @Test
+    public void testOctopusPaymentFactory_ExternalAPI() {
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(new Random(10));
+        Payment payment = octopusPaymentFactory.createPaymentMethod(octopusAPI);
+        Assertions.assertTrue(payment instanceof OctopusPayment);
+    }
+
+    @Test
+    public void testOctopusPaymentFactory_ExternalAPI_Null() {
+        Payment payment = octopusPaymentFactory.createPaymentMethod(null);
+        // Test if there is no NullPointerException
+        Assertions.assertDoesNotThrow(() -> payment.doPayment(1));
         Assertions.assertTrue(payment instanceof OctopusPayment);
     }
 
@@ -52,14 +74,10 @@ public class OctopusPaymentTest {
      */
     @Test
     public void testOctopusDoPayment() {
-        class OctopusPaymentStub extends OctopusPayment {
-            @Override
-            public boolean doPayment(double price) {
-                return true;
-            }
-        }
-        OctopusPayment octopusPayment = new OctopusPaymentStub();
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(new Random(10));
+        Payment octopusPayment = octopusPaymentFactory.createPaymentMethod(octopusAPI);
         Assertions.assertTrue(octopusPayment.doPayment(100));
+        Assertions.assertEquals(PaymentStatus.SUCCESS, octopusPayment.getPaymentStatus());
     }
 
     /**
@@ -69,16 +87,12 @@ public class OctopusPaymentTest {
      */
     @Test
     public void testOctopusDoPayment_False() {
-        class OctopusPaymentStub extends OctopusPayment {
-            @Override
-            public boolean doPayment(double price) {
-                return false;
-            }
-        }
-        OctopusPayment octopusPayment = new OctopusPaymentStub();
-        Assertions.assertFalse(octopusPayment.doPayment(100));
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(new Random(10));
+        Payment octopusPayment = octopusPaymentFactory.createPaymentMethod(octopusAPI);
+        Assertions.assertFalse(octopusPayment.doPayment(15));
+        Assertions.assertEquals(PaymentStatus.FAIL, octopusPayment.getPaymentStatus());
     }
-    
+
     /**
      * Test the getPaymentStatus method in OctopusPayment class
      * Create an OctopusPayment object and check if the payment status is PaymentStatus.NOT_PROCEED

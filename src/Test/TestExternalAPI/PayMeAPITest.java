@@ -36,7 +36,7 @@ public class PayMeAPITest {
     public void testGetExternalAPI_Null_Random() {
         ExternalAPI externalAPI =  payMeAPIFactory.getExternalAPI(null);
         // Test if there is no NullPointerException
-        externalAPI.doPayment(1);
+        Assertions.assertDoesNotThrow(() -> externalAPI.doPayment(1));
         Assertions.assertNotNull(externalAPI);
         Assertions.assertTrue(externalAPI instanceof PayMeAPI);
     }

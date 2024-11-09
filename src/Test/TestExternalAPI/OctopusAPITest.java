@@ -53,10 +53,11 @@ public class OctopusAPITest {
      */
     @Test
     public void testOctopusFactory_Random_Null(){
-        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(null);
+        ExternalAPI externalAPI = octopusAPIFactory.getExternalAPI(null);
+        Assertions.assertDoesNotThrow(() -> externalAPI.doPayment(1));
         // Test if there is no NullPointerException
-        octopusAPI.doPayment(1);
-        Assertions.assertTrue(octopusAPI instanceof OctopusAPI);
+        externalAPI.doPayment(1);
+        Assertions.assertTrue(externalAPI instanceof OctopusAPI);
     }
     
     /**

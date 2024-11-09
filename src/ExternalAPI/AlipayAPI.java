@@ -10,7 +10,7 @@ public class AlipayAPI implements ExternalAPI {
     Random random;
 
     /**
-     * Constructor for AlipayAPI
+     * Default Constructor for AlipayAPI
      */
     AlipayAPI() {
         random = new Random();
