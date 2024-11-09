@@ -3,29 +3,29 @@ package ExternalAPI;
 import java.util.Random;
 
 /**
- * OctopusAPIFactory class
- * It is used to create the OctopusAPI object
+ * WeChatPayAPIFactory class
+ * It is used to create the WeChatPayAPI object
  */
-public class OctopusAPIFactory implements ExternalAPIFactory {
+public class WeChatPayAPIFactory implements ExternalAPIFactory {
     /**
      * Create ExternalAPI object
-     * @return OctopusAPI object for the octopus card API
+     * @return WeChatPayAPI object for the WeChatPay API
      */
     @Override
     public ExternalAPI getExternalAPI() {
-        return new OctopusAPI();
+        return new WeChatPayAPI();
     }
-
+    
     /**
      * Create ExternalAPI object with random object
      * @param random Random object to be used for testing
-     * @return OctopusAPI object for the octopus card API
+     * @return WeChatPayAPI object for the WeChatPay API
      */
     @Override
     public ExternalAPI getExternalAPI(Random random) {
         if (random == null) {
-            return new OctopusAPI();
+            return new WeChatPayAPI();
         }
-        return new OctopusAPI(random);
+        return new WeChatPayAPI(random);
     }
 }

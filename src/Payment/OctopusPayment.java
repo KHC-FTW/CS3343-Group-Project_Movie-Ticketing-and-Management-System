@@ -18,6 +18,16 @@ public class OctopusPayment implements Payment {
         octopusAPIFactory = new OctopusAPIFactory();
         paymentStatus = PaymentStatus.NOT_PROCEED;
     }
+    
+    /**
+     * Constructor
+     * Create OctopusAPIFactory object for Octopus card API to simulate the payment process for testing purpose
+     * @param octopusAPIFactory OctopusAPIFactory object to be used for testing
+     */
+    public OctopusPayment(OctopusAPIFactory octopusAPIFactory) {
+        this.octopusAPIFactory = octopusAPIFactory;
+        paymentStatus = PaymentStatus.NOT_PROCEED;
+    }
 
     /**
      * Do payment with Octopus card by simulating the payment process using Octopus card API

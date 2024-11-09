@@ -48,6 +48,18 @@ public class OctopusAPITest {
     }
     
     /**
+     * Test the OctopusAPIFactory class with null random object
+     * Create an OctopusAPI object and check if it is an instance of OctopusAPI
+     */
+    @Test
+    public void testOctopusFactory_Random_Null(){
+        ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(null);
+        // Test if there is no NullPointerException
+        octopusAPI.doPayment(1);
+        Assertions.assertTrue(octopusAPI instanceof OctopusAPI);
+    }
+    
+    /**
      * Test the doPayment method in OctopusAPI class
      * Create an OctopusAPI object and check if the doPayment method returns true
      * By trial and error, the random number generated is 113, which is greater than or equal to the price 100
@@ -55,7 +67,7 @@ public class OctopusAPITest {
     @Test
     public void testDoPayment(){
         ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(random);
-        Assertions.assertTrue(octopusAPI.doPayment(100));// random.nextInt(0, 100 * 2) = 113
+        Assertions.assertTrue(octopusAPI.doPayment(100));
     }
     
     /**
@@ -66,6 +78,6 @@ public class OctopusAPITest {
     @Test
     public void testDoPayment_Fail(){
         ExternalAPI octopusAPI = octopusAPIFactory.getExternalAPI(random);
-        Assertions.assertFalse(octopusAPI.doPayment(15));// random.nextInt(0, 15 * 2) = 3
+        Assertions.assertFalse(octopusAPI.doPayment(15));
     }
 }
