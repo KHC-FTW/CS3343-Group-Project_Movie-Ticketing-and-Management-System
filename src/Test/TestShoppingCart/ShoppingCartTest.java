@@ -22,7 +22,6 @@ import java.util.*;
 public class ShoppingCartTest {
     ShoppingCart shoppingCart;
     HashMap<Product, Integer> productCart;
-    HashMap<Movie, Integer> movieCart;
     List<MovieTicket> movieTicketCart;
     Product testSnack;
     Product testDrink;

@@ -2,7 +2,6 @@ package ShoppingCart;
 
 import Product.Product;
 import Product.MovieTicket;
-import selectMovieModule.Movie;
 
 
 import java.util.*;
