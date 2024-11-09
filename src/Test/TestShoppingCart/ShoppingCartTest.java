@@ -22,7 +22,6 @@ import java.util.*;
 public class ShoppingCartTest {
     ShoppingCart shoppingCart;
     HashMap<Product, Integer> productCart;
-    HashMap<Movie, Integer> movieCart;
     List<MovieTicket> movieTicketCart;
     Product testSnack;
     Product testDrink;
@@ -228,5 +227,24 @@ public class ShoppingCartTest {
         Assertions.assertTrue(removeMovieTicket.isEmpty());
     }
 
+    /**
+     * Test removeMovieTicket method of ShoppingCart class when all movie tickets are removed
+     */
+    @Test
+    void testRemoveMovieTicket_NoMoreMovieTicket() {
+        shoppingCart.removeMovieTicket(movieTicket);
+        Optional<MovieTicket> removeMovieTicket = shoppingCart.removeMovieTicket(movieTicket);
+        Assertions.assertTrue(removeMovieTicket.isEmpty());
+    }
+    
+    /**
+     * Test getTotalPrice method of ShoppingCart class
+     */
+    @Test
+    void testGetTotalPrice() {
+        double expectPrice = testSnack.getPrice() + testDrink.getPrice() + movieTicket.getPrice();
+        double totalPrice = shoppingCart.getTotalPrice();
+        Assertions.assertEquals(expectPrice, totalPrice);
+    }
 
 }

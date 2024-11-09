@@ -3,17 +3,16 @@ package ExternalAPI;
 import java.util.Random;
 
 /**
- * OctopusAPI class<br>
- * It is used to simulate the payment process of the octopus card API
+ * PaymeAPI class<br>
+ * It is used to simulate payment using Payme API
  */
-public class OctopusAPI implements ExternalAPI {
-
-    private final Random random;
+public class PayMeAPI implements ExternalAPI {
+    final Random random;
 
     /**
      * Default constructor
      */
-    OctopusAPI() {
+    PayMeAPI() {
         random = new Random();
     }
 
@@ -22,13 +21,12 @@ public class OctopusAPI implements ExternalAPI {
      *
      * @param random Random object to be used for testing
      */
-    OctopusAPI(Random random) {
+    PayMeAPI(Random random) {
         this.random = random;
     }
 
     /**
-     * Simulate the payment process of the octopus card API<br>
-     * The payment is successful if the random number generated is greater than or equal to the price
+     * Simulate the payment process of the Payme API using random to generate a random number to determine if payment is successful
      *
      * @param price price of the product
      * @return true if the payment is successful, false otherwise

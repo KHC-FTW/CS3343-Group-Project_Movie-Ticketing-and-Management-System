@@ -1,21 +1,34 @@
 package Payment;
 
+import ExternalAPI.ExternalAPI;
 import ExternalAPI.OctopusAPIFactory;
 
+
 /**
- * OctopusPayment class
+ * OctopusPayment class<br>
  * It is used to do payment with Octopus card
  */
 public class OctopusPayment implements Payment {
-    private final OctopusAPIFactory octopusAPIFactory;
+    private final ExternalAPI octopusAPI;
     private PaymentStatus paymentStatus;
 
     /**
-     * Constructor
-     * Create OctopusAPIFactory object for Octopus card API to simulate the payment process
+     * Constructor<br>
+     * Create OctopusAPI object for Octopus card API to simulate the payment process
      */
-    public OctopusPayment() {
-        octopusAPIFactory = new OctopusAPIFactory();
+    OctopusPayment() {
+        octopusAPI = new OctopusAPIFactory().getExternalAPI();
+        paymentStatus = PaymentStatus.NOT_PROCEED;
+    }
+
+    /**
+     * Constructor<br>
+     * Create OctopusAPI object for Octopus card API to simulate the payment process for testing purpose
+     *
+     * @param octopusAPI ExternalAPI object to be used for testing
+     */
+    OctopusPayment(ExternalAPI octopusAPI) {
+        this.octopusAPI = octopusAPI;
         paymentStatus = PaymentStatus.NOT_PROCEED;
     }
 
@@ -28,7 +41,7 @@ public class OctopusPayment implements Payment {
     @Override
     public boolean doPayment(double price) {
         System.out.println("Octopus Payment: $" + price);
-        boolean result = octopusAPIFactory.getExternalAPI().doPayment(price);
+        boolean result = octopusAPI.doPayment(price);
         paymentStatus = result ? PaymentStatus.SUCCESS : PaymentStatus.FAIL;
         return result;
     }

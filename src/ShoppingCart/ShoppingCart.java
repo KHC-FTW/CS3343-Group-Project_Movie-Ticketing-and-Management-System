@@ -2,7 +2,6 @@ package ShoppingCart;
 
 import Product.Product;
 import Product.MovieTicket;
-import selectMovieModule.Movie;
 
 
 import java.util.*;
@@ -156,4 +155,22 @@ public class ShoppingCart {
         movieTicketCart.remove(movieTicket);
         return movieTicketInCart;
     }
+
+    /**
+     * Get the total price of the products in the shopping cart
+     *
+     * @return the total price of the products in the shopping cart
+     */
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for (Map.Entry<Product, Integer> entry : productCart.entrySet()) {
+            totalPrice += entry.getKey().getPrice() * entry.getValue();
+        }
+        for (MovieTicket movieTicket : movieTicketCart) {
+            totalPrice += movieTicket.getPrice();
+        }
+        return totalPrice;
+    }
+    
+    
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public class Drink implements ProductWithPortion {
     private final String name;
-    private double price;
+    private final double price;
     private String portion;
     private static final List<Drink> allDrink = new ArrayList<>();
 

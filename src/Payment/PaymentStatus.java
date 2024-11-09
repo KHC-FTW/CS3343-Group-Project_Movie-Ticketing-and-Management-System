@@ -1,7 +1,7 @@
 package Payment;
 
 /**
- * PaymentStatus enum
+ * PaymentStatus enum<br>
  * It is used to represent the payment status
  */
 public enum PaymentStatus {
