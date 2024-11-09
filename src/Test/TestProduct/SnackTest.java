@@ -130,7 +130,7 @@ public class SnackTest {
      */
     @Test
     public void testGetAll() {
-        List<Snack> allSnacks = Snack.getallsnacks();
+        List<Snack> allSnacks = Snack.getAllSnacks();
         Assertions.assertEquals(allSnacks.getFirst(), snack1);
         Assertions.assertEquals(allSnacks.get(1), snack2);
     }

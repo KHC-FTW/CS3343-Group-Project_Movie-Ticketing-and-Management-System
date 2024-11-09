@@ -2,8 +2,12 @@ package ExternalAPI;
 
 import java.util.Random;
 
+/**
+ * WeChatPayAPI class<br>
+ * It is used to simulate the payment process of the WeChatPay API
+ */
 public class WeChatPayAPI implements ExternalAPI {
-    Random random;
+    final Random random;
 
     /**
      * Default constructor
@@ -13,7 +17,7 @@ public class WeChatPayAPI implements ExternalAPI {
     }
 
     /**
-     * Constructor with random object
+     * Constructor with random object for testing with specified random seed
      *
      * @param random Random object to be used for testing
      */
@@ -24,6 +28,7 @@ public class WeChatPayAPI implements ExternalAPI {
 
     /**
      * Simulate the payment process of the WeChatPay API using random to generate a random number to determine if payment is successful
+     *
      * @param price price of the product
      * @return true if the payment is successful, false otherwise
      */

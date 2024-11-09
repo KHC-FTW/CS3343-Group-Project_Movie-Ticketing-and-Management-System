@@ -3,7 +3,7 @@ package Payment;
 import ExternalAPI.ExternalAPI;
 
 /**
- * OctopusPaymentFactory class
+ * OctopusPaymentFactory class<br>
  * It is used to create OctopusPayment object
  */
 public class OctopusPaymentFactory implements PaymentFactory {
@@ -13,8 +13,8 @@ public class OctopusPaymentFactory implements PaymentFactory {
     }
 
     /**
-     * @param externalAPI ExternalAPI object to be used for payment 
-     * @return Payment object
+     * @param externalAPI ExternalAPI object to be used for payment
+     * @return Payment object of OctopusPayment with ExternalAPI object if externalAPI is not null, otherwise return OctopusPayment object
      */
     @Override
     public Payment createPaymentMethod(ExternalAPI externalAPI) {

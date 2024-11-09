@@ -2,11 +2,14 @@ package ExternalAPI;
 
 import java.util.Random;
 
+/**
+ * CreditCardAPIFactory class<br>
+ * It is used to create the CreditCardAPI object
+ */
 public class CreditCardAPIFactory implements ExternalAPIFactory {
-
-
     /**
      * Create a CreditCardAPI object
+     *
      * @return CreditCardAPI object
      */
     @Override
@@ -16,7 +19,8 @@ public class CreditCardAPIFactory implements ExternalAPIFactory {
 
     /**
      * Create a CreditCardAPI object with a random object
-     * @param random Random object to be used for testing 
+     *
+     * @param random Random object to be used for testing
      * @return CreditCardAPI object with random object if random is not null, otherwise return CreditCardAPI object
      */
     @Override

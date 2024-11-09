@@ -1,13 +1,11 @@
 package Payment;
 
 import ExternalAPI.ExternalAPI;
-import ExternalAPI.ExternalAPIFactory;
 import ExternalAPI.OctopusAPIFactory;
 
-import java.util.Random;
 
 /**
- * OctopusPayment class
+ * OctopusPayment class<br>
  * It is used to do payment with Octopus card
  */
 public class OctopusPayment implements Payment {
@@ -15,18 +13,19 @@ public class OctopusPayment implements Payment {
     private PaymentStatus paymentStatus;
 
     /**
-     * Constructor
-     * Create OctopusAPIFactory object for Octopus card API to simulate the payment process
+     * Constructor<br>
+     * Create OctopusAPI object for Octopus card API to simulate the payment process
      */
     OctopusPayment() {
         octopusAPI = new OctopusAPIFactory().getExternalAPI();
         paymentStatus = PaymentStatus.NOT_PROCEED;
     }
-    
+
     /**
-     * Constructor
+     * Constructor<br>
      * Create OctopusAPI object for Octopus card API to simulate the payment process for testing purpose
-     * @param octopusAPI OctopusAPIFactory object to be used for testing
+     *
+     * @param octopusAPI ExternalAPI object to be used for testing
      */
     OctopusPayment(ExternalAPI octopusAPI) {
         this.octopusAPI = octopusAPI;

@@ -3,7 +3,7 @@ package ExternalAPI;
 import java.util.Random;
 
 /**
- * AlipayAPI class
+ * AlipayAPI class<br>
  * It is used to simulate the payment process of the Alipay API
  */
 public class AlipayAPI implements ExternalAPI {

@@ -2,6 +2,10 @@ package ExternalAPI;
 
 import java.util.Random;
 
+/**
+ * CreditCardAPI class<br>
+ * It is used to simulate the payment process of the Credit Card API
+ */
 public class CreditCardAPI implements ExternalAPI {
     Random random;
 
@@ -23,6 +27,7 @@ public class CreditCardAPI implements ExternalAPI {
 
     /**
      * Simulate the payment process of the credit card API
+     *
      * @param price price of the product in shopping cart
      * @return true if the payment is successful, false otherwise
      */

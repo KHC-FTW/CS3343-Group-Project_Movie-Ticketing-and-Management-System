@@ -3,23 +3,34 @@ package Payment;
 import ExternalAPI.ExternalAPI;
 import ExternalAPI.PayMeAPIFactory;
 
-public class PayMePayment implements Payment{
+/**
+ * PayMePayment class<br>
+ * It is used to do payment with PayMeAPI
+ */
+public class PayMePayment implements Payment {
     PaymentStatus paymentStatus;
-    ExternalAPI payMeAPI;
-    
-    PayMePayment(){
+    final ExternalAPI payMeAPI;
+
+    /**
+     * Constructor of PayMePayment
+     */
+    PayMePayment() {
         this.paymentStatus = PaymentStatus.NOT_PROCEED;
         this.payMeAPI = new PayMeAPIFactory().getExternalAPI();
     }
-   
-    PayMePayment(ExternalAPI payMeAPI){
+
+    /**
+     * Constructor of PayMePayment with ExternalAPI object for testing
+     *
+     * @param payMeAPI ExternalAPI object to be used for payment
+     */
+    PayMePayment(ExternalAPI payMeAPI) {
         this.paymentStatus = PaymentStatus.NOT_PROCEED;
         this.payMeAPI = payMeAPI;
     }
-    
+
     /**
-     * 
-     * @param price price of the product 
+     * @param price price of the product
      * @return true if the payment is successful, false otherwise
      */
     @Override
@@ -31,7 +42,9 @@ public class PayMePayment implements Payment{
     }
 
     /**
-     * @return 
+     * Get the payment type
+     *
+     * @return PaymentType.PAYME for PayMe
      */
     @Override
     public PaymentType getPaymentType() {
@@ -39,7 +52,9 @@ public class PayMePayment implements Payment{
     }
 
     /**
-     * @return 
+     * Get the payment status
+     *
+     * @return PaymentStatus of the payment method
      */
     @Override
     public PaymentStatus getPaymentStatus() {
