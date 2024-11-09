@@ -8,7 +8,7 @@ public class CreditCardAPI implements ExternalAPI {
     /**
      * Default constructor
      */
-    public CreditCardAPI() {
+    CreditCardAPI() {
         random = new Random();
     }
 
@@ -17,7 +17,7 @@ public class CreditCardAPI implements ExternalAPI {
      *
      * @param random Random object to be used for testing
      */
-    public CreditCardAPI(Random random) {
+    CreditCardAPI(Random random) {
         this.random = random;
     }
 

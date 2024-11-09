@@ -1,6 +1,7 @@
 package TestExternalAPI;
 
 import ExternalAPI.AlipayAPIFactory;
+import ExternalAPI.AlipayAPI;
 import ExternalAPI.ExternalAPI;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,14 +23,14 @@ public class AlipayAPITest {
     public void testGetExternalAPI() {
         ExternalAPI externalAPI =  alipayAPIFactory.getExternalAPI();
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof AlipayAPI);
     }
     
     @Test
     public void testGetExternalAPI_Random() {
         ExternalAPI externalAPI =  alipayAPIFactory.getExternalAPI(random);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof AlipayAPI);
     }
     
     @Test
@@ -38,7 +39,7 @@ public class AlipayAPITest {
         // Test if there is no NullPointerException
         externalAPI.doPayment(1);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof AlipayAPI);
     }
     
     @Test

@@ -1,6 +1,7 @@
 package TestExternalAPI;
 
 import ExternalAPI.ExternalAPI;
+import ExternalAPI.PayMeAPI;
 import ExternalAPI.PayMeAPIFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,14 +22,14 @@ public class PayMeAPITest {
     public void testGetExternalAPI() {
         ExternalAPI externalAPI =  payMeAPIFactory.getExternalAPI();
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof PayMeAPI);
     }
     
     @Test
     public void testGetExternalAPI_Random() {
         ExternalAPI externalAPI =  payMeAPIFactory.getExternalAPI(random);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof PayMeAPI);
     }
     
     @Test
@@ -37,7 +38,7 @@ public class PayMeAPITest {
         // Test if there is no NullPointerException
         externalAPI.doPayment(1);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof PayMeAPI);
     }
     
     @Test

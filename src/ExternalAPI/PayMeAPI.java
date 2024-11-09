@@ -12,7 +12,7 @@ public class PayMeAPI implements ExternalAPI {
     /**
      * Default constructor
      */
-    public PayMeAPI() {
+    PayMeAPI() {
         random = new Random();
     }
 
@@ -21,7 +21,7 @@ public class PayMeAPI implements ExternalAPI {
      *
      * @param random Random object to be used for testing
      */
-    public PayMeAPI(Random random) {
+    PayMeAPI(Random random) {
         this.random = random;
     }
 

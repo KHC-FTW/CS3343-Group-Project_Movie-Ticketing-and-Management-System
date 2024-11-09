@@ -1,6 +1,7 @@
 package TestExternalAPI;
 
 import ExternalAPI.ExternalAPI;
+import ExternalAPI.WeChatPayAPI;
 import ExternalAPI.WeChatPayAPIFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,14 +23,14 @@ public class WeChatPayAPITest {
     public void testGetExternalAPI() {
         ExternalAPI externalAPI =  weChatPayAPIFactory.getExternalAPI();
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof WeChatPayAPI);
     }
     
     @Test
     public void testGetExternalAPI_Random() {
         ExternalAPI externalAPI =  weChatPayAPIFactory.getExternalAPI(random);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof WeChatPayAPI);
     }
     
     @Test
@@ -38,7 +39,7 @@ public class WeChatPayAPITest {
         // Test if there is no NullPointerException
         externalAPI.doPayment(1);
         Assertions.assertNotNull(externalAPI);
-        Assertions.assertTrue(externalAPI instanceof ExternalAPI);
+        Assertions.assertTrue(externalAPI instanceof WeChatPayAPI);
     }
     
     @Test

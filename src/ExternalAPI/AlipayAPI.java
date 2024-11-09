@@ -12,7 +12,7 @@ public class AlipayAPI implements ExternalAPI {
     /**
      * Constructor for AlipayAPI
      */
-    public AlipayAPI() {
+    AlipayAPI() {
         random = new Random();
     }
 
@@ -21,7 +21,7 @@ public class AlipayAPI implements ExternalAPI {
      *
      * @param random Random object to be used for testing
      */
-    public AlipayAPI(Random random) {
+    AlipayAPI(Random random) {
         this.random = random;
     }
 

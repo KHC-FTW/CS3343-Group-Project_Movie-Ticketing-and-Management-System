@@ -8,7 +8,7 @@ public class WeChatPayAPI implements ExternalAPI {
     /**
      * Default constructor
      */
-    public WeChatPayAPI() {
+    WeChatPayAPI() {
         random = new Random();
     }
 
@@ -18,7 +18,7 @@ public class WeChatPayAPI implements ExternalAPI {
      * @param random Random object to be used for testing
      */
 
-    public WeChatPayAPI(Random random) {
+    WeChatPayAPI(Random random) {
         this.random = random;
     }
 
