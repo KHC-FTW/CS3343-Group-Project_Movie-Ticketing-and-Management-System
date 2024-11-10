@@ -1,37 +1,36 @@
 package ShoppingCart;
 
 import Product.Product;
-import selectMovieModule.Movie;
+import Product.MovieTicket;
 
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * ShoppingCart class that contains all products in the shopping cart
  */
 public class ShoppingCart {
     private final Map<Product, Integer> productCart;
-    private final Map<Movie, Integer> movieCart;
+    private final List<MovieTicket> movieTicketCart;
 
     /**
      * Default constructor for ShoppingCart class, which initializes the shopping Cart of products and movies
      */
     public ShoppingCart() {
         productCart = new HashMap<>();
-        movieCart = new HashMap<>();
+        movieTicketCart = new ArrayList<>();
     }
 
     /**
-     * Constructor for ShoppingCart class, which the Cart is initialized with the hashmap of products and movies passed into the constructor
+     * Constructor for ShoppingCart class,
+     * which the Cart is initialized with the hashmap of products and list of movie ticket passed into the constructor
      *
-     * @param productCart : products in the shopping cart
-     * @param movieCart   : movies in the shopping cart
+     * @param productCart     : products in the shopping cart
+     * @param movieTicketCart : movies tickets in the shopping cart
      */
-    public ShoppingCart(HashMap<Product, Integer> productCart, HashMap<Movie, Integer> movieCart) {
+    public ShoppingCart(HashMap<Product, Integer> productCart, List<MovieTicket> movieTicketCart) {
         this.productCart = productCart;
-        this.movieCart = movieCart;
+        this.movieTicketCart = movieTicketCart;
     }
 
     /**
@@ -64,25 +63,29 @@ public class ShoppingCart {
         return productCart;
     }
 
-    /**
-     * Add a movie to the shopping cart
-     *
-     * @param movie : movie to add to the shopping cart
-     */
-    public void addMovie(Movie movie) {
-        int movieCount = movieCart.getOrDefault(movie, 0);
-        movieCart.put(movie, movieCount + 1);
+    public Optional<MovieTicket> searchMovieTicket(MovieTicket movieTicket) {
+        for (MovieTicket movieTicketInCart : movieTicketCart) {
+            if (movieTicket.equals(movieTicketInCart)) {
+                return Optional.of(movieTicket);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
-     * Add a movie to the shopping cart with a specific quantity
+     * Add a movieTicket to the shopping cart
+     * It checks if the movie ticket is already in the shopping cart, if it is, it throws an InvalidMovieTicketException,
+     * as there should have no duplicate movie tickets in the shopping cart
      *
-     * @param movie    : movie to add to the shopping cart
-     * @param quantity : quantity of the movie to add to the shopping cart
+     * @param movieTicket : movieTicket to add to the shopping cart
+     * @throws InvalidMovieTicketException if the movie ticket is already in the shopping cart
      */
-    public void addMovie(Movie movie, int quantity) {
-        int movieCount = movieCart.getOrDefault(movie, 0);
-        movieCart.put(movie, movieCount + quantity);
+    public void addMovieTicket(MovieTicket movieTicket) throws InvalidMovieTicketException {
+        Optional<MovieTicket> movieTicketInCart = searchMovieTicket(movieTicket);
+        if (movieTicketInCart.isPresent()) {
+            throw new InvalidMovieTicketException();
+        }
+        movieTicketCart.add(movieTicket);
     }
 
     /**
@@ -90,8 +93,8 @@ public class ShoppingCart {
      *
      * @return the movies in the shopping cart in Map
      */
-    public Map<Movie, Integer> getMovieCart() {
-        return movieCart;
+    public List<MovieTicket> getMovieTicketCart() {
+        return movieTicketCart;
     }
 
     /**
@@ -99,7 +102,7 @@ public class ShoppingCart {
      */
     public void clearAllCart() {
         productCart.clear();
-        movieCart.clear();
+        movieTicketCart.clear();
     }
 
     /**
@@ -112,32 +115,62 @@ public class ShoppingCart {
     /**
      * clear the shopping cart of movies
      */
-    public void clearMovieCart() {
-        movieCart.clear();
+    public void clearMovieTicketCart() {
+        movieTicketCart.clear();
     }
-    
+
     /**
      * Remove a product from the shopping cart by decreasing the quantity by the number passed into the method
      * If the quantity of the product is smaller than or equal to 0 after the quantity is decreased, remove the product from the shopping cart<br>
-     * <strong>Note: If movie and product are modified so that they have the same parent class, this method can be refactored not to use generics</strong>
+     *
      * @param objectInCart the type of the product, either Product or Movie
-     * @param Cart the shopping cart of the product
-     * @param quantity the quantity of the product to remove
+     * @param quantity     the quantity of the product to remove
      * @return empty if the product is not in the shopping cart, otherwise return the quantity of the product before removing
-     * @param <T> the type of the product, either Product or Movie
      */
-    public <T> Optional<Integer> removeCart(T objectInCart, Map<T, Integer> Cart, int quantity) {
-        Integer CartCount = Cart.get(objectInCart);
+    public Optional<Integer> removeFromProductCart(Product objectInCart, int quantity) {
+        Integer CartCount = productCart.get(objectInCart);
         if (CartCount == null) {
             return Optional.empty();
         }
         int newCartCount = CartCount - quantity;
         if (newCartCount <= 0) {
-            Cart.remove(objectInCart);
+            productCart.remove(objectInCart);
         } else {
-            Cart.put(objectInCart, newCartCount);
+            productCart.put(objectInCart, newCartCount);
         }
         return Optional.of(CartCount);
     }
 
+    /**
+     * Remove a movie ticket from the shopping cart
+     *
+     * @param movieTicket : movie ticket to remove from the shopping cart
+     * @return the movie ticket removed from the shopping cart if it is in the shopping cart, empty otherwise
+     */
+    public Optional<MovieTicket> removeMovieTicket(MovieTicket movieTicket) {
+        Optional<MovieTicket> movieTicketInCart = searchMovieTicket(movieTicket);
+        if (movieTicketInCart.isEmpty()) {
+            return Optional.empty();
+        }
+        movieTicketCart.remove(movieTicket);
+        return movieTicketInCart;
+    }
+
+    /**
+     * Get the total price of the products in the shopping cart
+     *
+     * @return the total price of the products in the shopping cart
+     */
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for (Map.Entry<Product, Integer> entry : productCart.entrySet()) {
+            totalPrice += entry.getKey().getPrice() * entry.getValue();
+        }
+        for (MovieTicket movieTicket : movieTicketCart) {
+            totalPrice += movieTicket.getPrice();
+        }
+        return totalPrice;
+    }
+    
+    
 }

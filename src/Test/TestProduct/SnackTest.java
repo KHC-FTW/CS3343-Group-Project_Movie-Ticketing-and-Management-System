@@ -1,4 +1,4 @@
-package Test.TestProduct;
+package TestProduct;
 
 import Product.Snack;
 import org.junit.jupiter.api.Assertions;
@@ -28,7 +28,7 @@ public class SnackTest {
      * Test equals method with the same instance of snack
      */
     @Test
-    public void testEqualsSameSnacks() {
+    public void testEquals_SameSnacks() {
         Assertions.assertTrue(snack1.equals(snack1));
         Assertions.assertEquals(snack1.hashCode(), snack1.hashCode());
     }
@@ -37,7 +37,7 @@ public class SnackTest {
      * Test equals method with two different snacks
      */
     @Test
-    public void testEqualsTwoDifferentSnacks() {
+    public void testEquals_TwoDifferentSnacks() {
         Assertions.assertFalse(snack1.equals(snack2));
         Assertions.assertNotEquals(snack1.hashCode(), snack2.hashCode());
     }
@@ -46,7 +46,7 @@ public class SnackTest {
      * Test equals method with two different snacks with the same name
      */
     @Test
-    public void testEqualsTwoDifferentSnacksWithSameName() {
+    public void testEquals_TwoDifferentSnacksWithSameName() {
         Snack snack3 = new Snack("fist snack", 20, "20g");
         Assertions.assertFalse(snack1.equals(snack3));
         Assertions.assertNotEquals(snack1.hashCode(), snack3.hashCode());
@@ -56,7 +56,7 @@ public class SnackTest {
      * Test equals method with two different snacks with the same price
      */
     @Test
-    public void testEqualsTwoDifferentSnacksWithSamePrice() {
+    public void testEquals_TwoDifferentSnacksWithSamePrice() {
         Snack snack3 = new Snack("second snack", 10, "20g");
         Assertions.assertFalse(snack1.equals(snack3));
         Assertions.assertNotEquals(snack1.hashCode(), snack3.hashCode());
@@ -66,7 +66,7 @@ public class SnackTest {
      * Test equals method with two different snacks with the same portion
      */
     @Test
-    public void testEqualsTwoDifferentSnacksWithSamePortion() {
+    public void testEquals_TwoDifferentSnacksWithSamePortion() {
         Snack snack3 = new Snack("second snack", 20, "10g");
         Assertions.assertFalse(snack1.equals(snack3));
         Assertions.assertNotEquals(snack1.hashCode(), snack3.hashCode());
@@ -76,7 +76,7 @@ public class SnackTest {
      * Test equals method with null
      */
     @Test
-    public void testEqualsNull() {
+    public void testEquals_Null() {
         Assertions.assertFalse(snack1.equals(null));
         Assertions.assertNotEquals(snack1.hashCode(), 0);
     }
@@ -85,7 +85,7 @@ public class SnackTest {
      * Test equals method with different class
      */
     @Test
-    public void testEqualsDifferentClass() {
+    public void testEquals_DifferentClass() {
         Object obj = new Object();
         Assertions.assertFalse(snack1.equals(obj));
         Assertions.assertNotEquals(snack1.hashCode(), obj.hashCode());
@@ -123,22 +123,14 @@ public class SnackTest {
     public void testGetPrice() {
         Assertions.assertEquals(10, snack1.getPrice());
     }
-
-    /**
-     * Test setPrice method
-     */
-    @Test
-    public void testSetPrice() {
-        double priceSet = snack1.setPrice(20);
-        Assertions.assertEquals(20, priceSet);
-    }
+    
 
     /**
      * Test getAllSnacks method
      */
     @Test
     public void testGetAll() {
-        List<Snack> allSnacks = Snack.getallsnacks();
+        List<Snack> allSnacks = Snack.getAllSnacks();
         Assertions.assertEquals(allSnacks.getFirst(), snack1);
         Assertions.assertEquals(allSnacks.get(1), snack2);
     }

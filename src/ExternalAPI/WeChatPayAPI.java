@@ -3,32 +3,31 @@ package ExternalAPI;
 import java.util.Random;
 
 /**
- * OctopusAPI class<br>
- * It is used to simulate the payment process of the octopus card API
+ * WeChatPayAPI class<br>
+ * It is used to simulate the payment process of the WeChatPay API
  */
-public class OctopusAPI implements ExternalAPI {
-
-    private final Random random;
+public class WeChatPayAPI implements ExternalAPI {
+    final Random random;
 
     /**
      * Default constructor
      */
-    OctopusAPI() {
+    WeChatPayAPI() {
         random = new Random();
     }
 
     /**
-     * Constructor with random object
+     * Constructor with random object for testing with specified random seed
      *
      * @param random Random object to be used for testing
      */
-    OctopusAPI(Random random) {
+
+    WeChatPayAPI(Random random) {
         this.random = random;
     }
 
     /**
-     * Simulate the payment process of the octopus card API<br>
-     * The payment is successful if the random number generated is greater than or equal to the price
+     * Simulate the payment process of the WeChatPay API using random to generate a random number to determine if payment is successful
      *
      * @param price price of the product
      * @return true if the payment is successful, false otherwise

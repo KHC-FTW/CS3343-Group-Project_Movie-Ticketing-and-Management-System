@@ -1,8 +1,9 @@
 package Payment;
 
 /**
- * Payment interface
+ * Payment interface<br>
  * It is used to simulate the payment process of the payment method
+ * <br><strong>Note: The constructor for the class which implements this interface should be set to package private by not adding any modifier, as they should be created using the corresponding factory method</strong>
  */
 public interface Payment {
     /**
@@ -11,7 +12,7 @@ public interface Payment {
      * @param price price of the product
      * @return true if the payment is successful, false otherwise
      */
-    boolean doPayment(int price);
+    boolean doPayment(double price);
 
     /**
      * Get the payment type
@@ -19,4 +20,11 @@ public interface Payment {
      * @return PaymentType of the payment method
      */
     PaymentType getPaymentType();
+
+    /**
+     * Get the payment status
+     *
+     * @return PaymentStatus of the payment method
+     */
+    PaymentStatus getPaymentStatus();
 }

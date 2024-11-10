@@ -1,38 +1,68 @@
 package Payment;
 
+import ExternalAPI.ExternalAPI;
 import ExternalAPI.OctopusAPIFactory;
 
+
 /**
- * OctopusPayment class
+ * OctopusPayment class<br>
  * It is used to do payment with Octopus card
  */
 public class OctopusPayment implements Payment {
-    OctopusAPIFactory octopusAPIFactory;
+    private final ExternalAPI octopusAPI;
+    private PaymentStatus paymentStatus;
+
     /**
-     * Constructor
-     * Create OctopusAPIFactory object for Octopus card API to simulate the payment process
+     * Constructor<br>
+     * Create OctopusAPI object for Octopus card API to simulate the payment process
      */
-    public OctopusPayment(){
-        octopusAPIFactory = new OctopusAPIFactory();
+    OctopusPayment() {
+        octopusAPI = new OctopusAPIFactory().getExternalAPI();
+        paymentStatus = PaymentStatus.NOT_PROCEED;
     }
-    
+
+    /**
+     * Constructor<br>
+     * Create OctopusAPI object for Octopus card API to simulate the payment process for testing purpose
+     *
+     * @param octopusAPI ExternalAPI object to be used for testing
+     */
+    OctopusPayment(ExternalAPI octopusAPI) {
+        this.octopusAPI = octopusAPI;
+        paymentStatus = PaymentStatus.NOT_PROCEED;
+    }
+
     /**
      * Do payment with Octopus card by simulating the payment process using Octopus card API
+     *
      * @param price price of the product
      * @return true if the payment is successful, false otherwise
      */
     @Override
-    public boolean doPayment(int price) {
+    public boolean doPayment(double price) {
         System.out.println("Octopus Payment: $" + price);
-        return octopusAPIFactory.getExternalAPI().doPayment(price);
+        boolean result = octopusAPI.doPayment(price);
+        paymentStatus = result ? PaymentStatus.SUCCESS : PaymentStatus.FAIL;
+        return result;
     }
 
     /**
      * Get the payment type
+     *
      * @return PaymentType.OCTOPUS for Octopus card
      */
     @Override
     public PaymentType getPaymentType() {
         return PaymentType.OCTOPUS;
+    }
+
+    /**
+     * get the payment status of this payment
+     *
+     * @return PaymentStatus.NOT_PROCEED if the payment have not done, else return the result of payment (PaymentStatus.SUCCESS if success, otherwise return PaymentStatus.FAIL.)
+     */
+    @Override
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 }
