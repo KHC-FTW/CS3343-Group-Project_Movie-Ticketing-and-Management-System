@@ -2,6 +2,7 @@ package TestProduct;
 
 import Product.Drink;
 
+import ShoppingCart.ExProductNotFound;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Test for Drink class in package Product
@@ -88,11 +88,10 @@ public class DrinkTest {
      * Test search drink
      */
     @Test
-    void testSearchDrink() {
+    void testSearchDrink() throws ExProductNotFound {
         Drink drink = testdrinkList.getFirst();
-        Optional<Drink> drinkOptional = Drink.searchDrink("Drink 1");
-        Assertions.assertTrue(drinkOptional.isPresent());
-        Assertions.assertEquals(drink, drinkOptional.get());
+        Drink actualDrink = Drink.searchDrink("Drink 1");
+        Assertions.assertEquals(drink, actualDrink);
     }
 
     /**
@@ -100,8 +99,8 @@ public class DrinkTest {
      */
     @Test
     void testSearchDrinkNotFound() {
-        Optional<Drink> drinkOptional = Drink.searchDrink("Drink not exist");
-        Assertions.assertTrue(drinkOptional.isEmpty());
+        Exception exception = Assertions.assertThrows(ExProductNotFound.class, () -> Drink.searchDrink("Drink not exist"));
+        Assertions.assertEquals("[Exception] Drink Drink not exist not found", exception.getMessage());
     }
 
     /**

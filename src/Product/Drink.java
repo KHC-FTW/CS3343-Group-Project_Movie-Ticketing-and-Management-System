@@ -1,9 +1,10 @@
 package Product;
 
+import ShoppingCart.ExProductNotFound;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Drink class that implements Product interface
@@ -78,13 +79,13 @@ public class Drink implements ProductWithPortion {
      * @param name  name of the drink
      * @return the drink if found, empty otherwise
      */
-    public static Optional<Drink> searchDrink(String name) {
+    public static Drink searchDrink(String name) throws ExProductNotFound {
         for (Drink drink : allDrink) {
             if (drink.getName().equals(name)) {
-                return Optional.of(drink);
+                return drink;
             }
         }
-        return Optional.empty();
+        throw new ExProductNotFound(String.format( "[Exception] Drink %s not found", name));
     }
 
     /**

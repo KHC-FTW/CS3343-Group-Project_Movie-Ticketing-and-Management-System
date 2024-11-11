@@ -1,9 +1,10 @@
 package Product;
 
+import ShoppingCart.ExProductNotFound;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Snack class that implements ProductWithPortion interface
@@ -115,14 +116,15 @@ public class Snack implements ProductWithPortion {
      * search for a snack by name
      *
      * @param name name of the snack
-     * @return the snack if found, empty otherwise
+     * @return the snack found
+     * @throws ExProductNotFound if the snack is not found
      */
-    public static Optional<Snack> searchSnack(String name) {
+    public static Snack searchSnack(String name) throws ExProductNotFound {
         for (Snack snack : allSnacks) {
             if (snack.getName().equals(name)) {
-                return Optional.of(snack);
+                return snack;
             }
         }
-        return Optional.empty();
+        throw new ExProductNotFound(String.format("[Exception] Snack %s not found", name));
     }
 }
