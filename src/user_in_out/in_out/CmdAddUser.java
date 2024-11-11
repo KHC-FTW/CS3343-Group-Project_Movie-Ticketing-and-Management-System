@@ -74,6 +74,7 @@ public class CmdAddUser implements Command {
             int index = 0;
             for (User user: newUsers)
                 System.out.printf("%-" + 5 + "s  %s\n", ++index, user.toString());
+            System.out.println();
         }
     }
 }

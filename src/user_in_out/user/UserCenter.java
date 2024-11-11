@@ -30,7 +30,9 @@ public class UserCenter {
 
     public void register(String name, String username, String password, int age, String school) throws ExDuplicateUsername {
         User newMember = new Member(db.getSamllestMemberId(), name, username, password, age, school);
-        db.addMember(newMember);
+        if (db.addMember(newMember) == false)
+            throw new ExDuplicateUsername();
+            
         currentUser = newMember;
     }
 
@@ -70,15 +72,15 @@ public class UserCenter {
         return newAdmin;
     }
 
-    public String delUser(String id) throws ExDeleteSelf, ExUserNotExist {
+    public User delUser(String id) throws ExDeleteSelf, ExUserNotExist {
         if (id.equals(currentUser.getId()))
             throw new ExDeleteSelf();
 
-        String delUserStr = db.delUser(id);
-        if (delUserStr.equals(""))
+        User user = db.delUser(id);
+        if (user == null)
             throw new ExUserNotExist();
 
-        return delUserStr;
+        return user;
     }
 
     public void searchUser(String idOrNameOrUsername) throws ExUserNotExist {

@@ -19,7 +19,7 @@ public class Main {
         while (true) {
             try {
                 // Prompt the user to select option
-                System.out.print("Please enter the ID or NAME to select an option (enter \"list\" or \"l\" to view options):\n> ");
+                System.out.print("Please enter the ID or NAME to select an option (enter \"list\" or \"l\" to view options) \n> ");
     
                 // Read the input string
                 input = scanner.nextLine().toLowerCase().trim();

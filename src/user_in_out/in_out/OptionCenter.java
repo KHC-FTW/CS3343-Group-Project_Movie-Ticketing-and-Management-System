@@ -16,17 +16,17 @@ public class OptionCenter {
     public OptionCenter() {
         // Order the options under this order: guest - member - admin, except option 0, can perform fast copy
         Option[] allOptions = {
-            new Option(0, "Exit", CmdExit.class),
-            new Option(1, "Register", CmdRegister.class),
-            new Option(2, "Login", CmdLogin.class),
-            new Option(3, "List Movies", CmdListMovies.class),
-            new Option(4, "Personal Profile", CmdListPersonalProfile.class),
-            new Option(5, "Logout", CmdLogout.class),
-            new Option(6, "List Movies (Admin)", CmdListMoviesAdmin.class),
-            new Option(7, "List All Users", CmdListAllUsers.class),
-            new Option(8, "Search User", CmdSearchUsers.class),
-            new Option(9, "Add User", CmdAddUser.class),
-            new Option(10, "Delete User", CmdDelUser.class)
+            new Option("Exit", CmdExit.class),
+            new Option("Register", CmdRegister.class),
+            new Option("Login", CmdLogin.class),
+            new Option("List Movies", CmdListMovies.class),
+            new Option("Personal Profile", CmdListPersonalProfile.class),
+            new Option("Logout", CmdLogout.class),
+            new Option("List Movies (Admin)", CmdListMoviesAdmin.class),
+            new Option("List All Users", CmdListAllUsers.class),
+            new Option("Search User", CmdSearchUsers.class),
+            new Option("Add User", CmdAddUser.class),
+            new Option("Delete User", CmdDelUser.class)
         };
 
         // Guest options initialization
