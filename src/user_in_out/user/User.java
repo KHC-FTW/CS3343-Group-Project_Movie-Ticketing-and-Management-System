@@ -46,12 +46,12 @@ public class User {
 
     public Category getCategory() { return null; }
 
-    public Option getOption(int optId) throws ExInvalidOption { 
-        for (Option option : options)
-            if (option.getId() == optId)
-                return option;
-
-        throw new ExInvalidOption();
+    public Option getOption(int index) throws ExInvalidOption { 
+        try {
+            return options.get(index);
+        } catch (Exception e) {
+            throw new ExInvalidOption();
+        }
     }
 
     public Option getOption(String optName) throws ExInvalidOption { 
@@ -64,8 +64,9 @@ public class User {
 
     public void listOptions() {
         System.out.println("Options available:");
+        int index = 0;
         for (Option option : options)
-            System.out.println(option.toString());
+            System.out.printf("%-" + 3 + "s %s\n", index++ + ".", option.toString());
     }
 
     public String toString() { 

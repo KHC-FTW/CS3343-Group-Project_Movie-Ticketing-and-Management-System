@@ -78,10 +78,10 @@ public class Database {
         return false;
     }
 
-    public String delUser(String id) {
+    public User delUser(String id) {
         User user = getUserById(id);
         if (user == null)
-            return "";
+            return null;
         
         int oldId = Integer.parseInt(user.getId().substring(1));
         users.remove(user); 
@@ -98,7 +98,7 @@ public class Database {
                 smallestAvailAdminId = oldId;
         }
 
-        return user.toString();
+        return user;
     }
 
     public ArrayList<User> searchUser(String idOrNameOrUsername) {
