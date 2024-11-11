@@ -1,8 +1,7 @@
 package ShoppingCart;
 
-import Product.Product;
 import Product.MovieTicket;
-
+import Product.Product;
 
 import java.util.*;
 
@@ -63,29 +62,37 @@ public class ShoppingCart {
         return productCart;
     }
 
-    public Optional<MovieTicket> searchMovieTicket(MovieTicket movieTicket) {
+    /**
+     * Search for a movie ticket in the shopping cart
+     *
+     * @param movieTicket : movie ticket to search for in the shopping cart
+     * @return the movie ticket in the shopping cart if it is in the shopping cart
+     * @throws ExProductNotFound if the movie ticket is not in the shopping cart
+     */
+    public MovieTicket searchMovieTicket(MovieTicket movieTicket) throws ExProductNotFound {
         for (MovieTicket movieTicketInCart : movieTicketCart) {
             if (movieTicket.equals(movieTicketInCart)) {
-                return Optional.of(movieTicket);
+                return movieTicketInCart;
             }
         }
-        return Optional.empty();
+        throw new ExProductNotFound("[Exception] Movie ticket not found");
     }
 
     /**
-     * Add a movieTicket to the shopping cart
-     * It checks if the movie ticket is already in the shopping cart, if it is, it throws an InvalidMovieTicketException,
+     * Add a movieTicket to the shopping cart<br>
+     * It checks if the movie ticket is already in the shopping cart, if it is, it throws an ExInvalidMovieTicket,
      * as there should have no duplicate movie tickets in the shopping cart
      *
      * @param movieTicket : movieTicket to add to the shopping cart
-     * @throws InvalidMovieTicketException if the movie ticket is already in the shopping cart
+     * @throws ExInvalidMovieTicket if the movie ticket is already in the shopping cart
      */
-    public void addMovieTicket(MovieTicket movieTicket) throws InvalidMovieTicketException {
-        Optional<MovieTicket> movieTicketInCart = searchMovieTicket(movieTicket);
-        if (movieTicketInCart.isPresent()) {
-            throw new InvalidMovieTicketException();
+    public void addMovieTicket(MovieTicket movieTicket) throws ExInvalidMovieTicket {
+        try {
+            searchMovieTicket(movieTicket);
+            throw new ExInvalidMovieTicket();
+        } catch (ExProductNotFound e) {
+            movieTicketCart.add(movieTicket);
         }
-        movieTicketCart.add(movieTicket);
     }
 
     /**
@@ -120,17 +127,19 @@ public class ShoppingCart {
     }
 
     /**
-     * Remove a product from the shopping cart by decreasing the quantity by the number passed into the method
+     * Remove a product from the shopping cart by decreasing the quantity by the number passed into the method<br>
      * If the quantity of the product is smaller than or equal to 0 after the quantity is decreased, remove the product from the shopping cart<br>
      *
      * @param objectInCart the type of the product, either Product or Movie
      * @param quantity     the quantity of the product to remove
-     * @return empty if the product is not in the shopping cart, otherwise return the quantity of the product before removing
+     * @return the quantity of the product before removing
+     * @throws ExProductNotFound if the product is not in the shopping cart
      */
-    public Optional<Integer> removeFromProductCart(Product objectInCart, int quantity) {
+    public int removeFromProductCart(Product objectInCart, int quantity) throws ExProductNotFound {
         Integer CartCount = productCart.get(objectInCart);
         if (CartCount == null) {
-            return Optional.empty();
+            throw new ExProductNotFound(
+                    String.format("[Exception] Product %s not found", objectInCart.getName()));
         }
         int newCartCount = CartCount - quantity;
         if (newCartCount <= 0) {
@@ -138,20 +147,18 @@ public class ShoppingCart {
         } else {
             productCart.put(objectInCart, newCartCount);
         }
-        return Optional.of(CartCount);
+        return CartCount;
     }
 
     /**
      * Remove a movie ticket from the shopping cart
      *
      * @param movieTicket : movie ticket to remove from the shopping cart
-     * @return the movie ticket removed from the shopping cart if it is in the shopping cart, empty otherwise
+     * @return the movie ticket removed from the shopping cart if it is in the shopping cart
+     * @throws ExProductNotFound if the movie ticket is not in the shopping cart
      */
-    public Optional<MovieTicket> removeMovieTicket(MovieTicket movieTicket) {
-        Optional<MovieTicket> movieTicketInCart = searchMovieTicket(movieTicket);
-        if (movieTicketInCart.isEmpty()) {
-            return Optional.empty();
-        }
+    public MovieTicket removeMovieTicket(MovieTicket movieTicket) throws ExProductNotFound {
+        MovieTicket movieTicketInCart = searchMovieTicket(movieTicket);
         movieTicketCart.remove(movieTicket);
         return movieTicketInCart;
     }
@@ -171,6 +178,6 @@ public class ShoppingCart {
         }
         return totalPrice;
     }
-    
-    
+
+
 }

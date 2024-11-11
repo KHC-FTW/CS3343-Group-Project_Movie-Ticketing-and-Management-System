@@ -1,12 +1,12 @@
 package TestProduct;
 
 import Product.Snack;
+import ShoppingCart.ExProductNotFound;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Test for Snack class in package Product
@@ -139,10 +139,9 @@ public class SnackTest {
      * Test searchProduct method
      */
     @Test
-    public void testSearchSnack() {
-        Optional<Snack> snackOptional = Snack.searchSnack("fist snack");
-        Assertions.assertTrue(snackOptional.isPresent());
-        Assertions.assertEquals(snack1, snackOptional.get());
+    public void testSearchSnack() throws ExProductNotFound {
+        Snack acutalSnack = Snack.searchSnack("fist snack");
+        Assertions.assertEquals(snack1, acutalSnack);
     }
     
     /**
@@ -150,7 +149,7 @@ public class SnackTest {
      */
     @Test
     public void testSearchSnackNotFound() {
-        Optional<Snack> snackOptional = Snack.searchSnack("snack not exist");
-        Assertions.assertTrue(snackOptional.isEmpty());
+        Exception exception = Assertions.assertThrows(ExProductNotFound.class, () -> Snack.searchSnack("snack not exist"));
+        Assertions.assertEquals("[Exception] Snack snack not exist not found", exception.getMessage());
     }
 }

@@ -4,8 +4,9 @@ import Product.Product;
 import Product.Drink;
 import Product.Snack;
 import ShoppingCart.ShoppingCart;
+import ShoppingCart.ExProductNotFound;
 import Product.MovieTicket;
-import ShoppingCart.InvalidMovieTicketException;
+import ShoppingCart.ExInvalidMovieTicket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,10 +103,10 @@ public class ShoppingCartTest {
     /**
      * Test addMovieTicket method of ShoppingCart class
      *
-     * @throws InvalidMovieTicketException if the movie ticket is invalid, which should not happen in this test
+     * @throws ExInvalidMovieTicket if the movie ticket is invalid, which should not happen in this test
      */
     @Test
-    void testAddMovieTicket() throws InvalidMovieTicketException {
+    void testAddMovieTicket() throws ExInvalidMovieTicket {
         MovieTicket movieTicket = new MovieTicket(testMovie1, movieSession, "A2");
         shoppingCart.addMovieTicket(movieTicket);
         movieTicketCart.add(movieTicket);
@@ -114,14 +115,14 @@ public class ShoppingCartTest {
 
     /**
      * Test addMovieTicket method of ShoppingCart class when the movie ticket already exists
-     * It tests whether the InvalidMovieTicketException is thrown
+     * It tests whether the ExInvalidMovieTicket is thrown
      */
     @Test
     void testAddMovieTicket_MovieTicketExists() {
         MovieTicket sameMovieTicket = new MovieTicket(testMovie1, movieSession, "A1");
-        InvalidMovieTicketException exception = Assertions.assertThrows(InvalidMovieTicketException.class,
+        ExInvalidMovieTicket exception = Assertions.assertThrows(ExInvalidMovieTicket.class,
                 () -> shoppingCart.addMovieTicket(sameMovieTicket));
-        Assertions.assertEquals("Invalid movie ticket", exception.getMessage());
+        Assertions.assertEquals("[Exception] Invalid movie ticket", exception.getMessage());
     }
 
   
@@ -178,12 +179,12 @@ public class ShoppingCartTest {
      * Test removeProduct method of ShoppingCart class
      */
     @Test
-    void testRemoveProduct() {
+    void testRemoveProduct() throws ExProductNotFound {
         for (int i = 0; i < 9; i++) {
             shoppingCart.addProduct(testSnack);
         }
-        Optional<Integer> quantity = shoppingCart.removeFromProductCart(testSnack, 9);
-        Assertions.assertTrue(quantity.isPresent());
+        int quantity = shoppingCart.removeFromProductCart(testSnack, 9);
+        Assertions.assertEquals(10, quantity);
         Assertions.assertEquals(1, shoppingCart.getProductCart().get(testSnack));
     }
 
@@ -193,17 +194,19 @@ public class ShoppingCartTest {
     @Test
     void testRemoveProduct_ProductNotExists() {
         Product product = new Snack("snack3", 30, "200g");
-        Optional<Integer> quantity = shoppingCart.removeFromProductCart(product, 1);
-        Assertions.assertTrue(quantity.isEmpty());
+        String massage = "[Exception] Product snack3 not found";
+        Exception exception = Assertions.assertThrows(
+                ExProductNotFound.class,()-> shoppingCart.removeFromProductCart(product, 1));
+        Assertions.assertEquals(massage, exception.getMessage());
     }
 
     /**
      * Test removeProduct method of ShoppingCart class when all products are removed
      */
     @Test
-    void testRemoveProduct_NoMoreProduct() {
-        Optional<Integer> quantity = shoppingCart.removeFromProductCart(testSnack, 1);
-        Assertions.assertTrue(quantity.isPresent());
+    void testRemoveProduct_NoMoreProduct() throws ExProductNotFound {
+        int quantity = shoppingCart.removeFromProductCart(testSnack, 1);
+        Assertions.assertEquals(1, quantity);
         Assertions.assertEquals(null, shoppingCart.getProductCart().get(testSnack));
     }
 
@@ -211,10 +214,10 @@ public class ShoppingCartTest {
      * Test removeMovieTicket method of ShoppingCart class
      */
     @Test
-    void testRemoveMovieTicket() {
-        Optional<MovieTicket> removeMovieTicket = shoppingCart.removeMovieTicket(movieTicket);
+    void testRemoveMovieTicket() throws ExProductNotFound {
+        MovieTicket removeMovieTicket = shoppingCart.removeMovieTicket(movieTicket);
         Assertions.assertEquals(new ArrayList<>(), shoppingCart.getMovieTicketCart());
-        Assertions.assertEquals(movieTicket, removeMovieTicket.orElse(null));
+        Assertions.assertEquals(movieTicket, removeMovieTicket);
     }
 
     /**
@@ -223,20 +226,11 @@ public class ShoppingCartTest {
     @Test
     void testRemoveMovieTicket_MovieTicketNotExists() {
         MovieTicket movieTicketNotExists = new MovieTicket(testMovie1, movieSession, "A2");
-        Optional<MovieTicket> removeMovieTicket = shoppingCart.removeMovieTicket(movieTicketNotExists);
-        Assertions.assertTrue(removeMovieTicket.isEmpty());
+        Exception exception =  Assertions.assertThrows(ExProductNotFound.class,()-> shoppingCart.removeMovieTicket(movieTicketNotExists));
+        Assertions.assertEquals("[Exception] Movie ticket not found", exception.getMessage());
     }
 
-    /**
-     * Test removeMovieTicket method of ShoppingCart class when all movie tickets are removed
-     */
-    @Test
-    void testRemoveMovieTicket_NoMoreMovieTicket() {
-        shoppingCart.removeMovieTicket(movieTicket);
-        Optional<MovieTicket> removeMovieTicket = shoppingCart.removeMovieTicket(movieTicket);
-        Assertions.assertTrue(removeMovieTicket.isEmpty());
-    }
-    
+
     /**
      * Test getTotalPrice method of ShoppingCart class
      */
