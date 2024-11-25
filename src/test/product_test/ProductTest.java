@@ -40,12 +40,12 @@ public class ProductTest {
         final int lineSeparator = 73;
         String snackTitle = String.format("\n%4s%-32s%-16s%-15s%-6s\n%s\n", " ", "Snacks/Drinks",
                 "Portion", "Quantity", "Price", "-".repeat(lineSeparator));
-        String formattedSnack = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n", 1, snack.getName(), " ",
+        String formattedSnack = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n", 1, snack.getName(), " ",
                 snack.getPortion(), 1, " ",
                 snack.getPrice());
-        String formattedDrink = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n", 2, drink.getName(),
+        String formattedDrink = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n", 2, drink.getName(),
                 " ", drink.getPortion(), 1, " ", (drink).getPrice());
-        String formattedMovieTicket = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n", 3, movieTicket.getName(),
+        String formattedMovieTicket = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n", 3, movieTicket.getName(),
                 " ", "N/A", 1, " ", movieTicket.getPrice());
         String expected = snackTitle + formattedSnack + formattedDrink + formattedMovieTicket + "-".repeat(
                 lineSeparator) + "\n";

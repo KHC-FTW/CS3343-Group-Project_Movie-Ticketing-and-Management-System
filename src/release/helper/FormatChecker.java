@@ -65,6 +65,8 @@ public class FormatChecker {
         return searchText;
     }
 
+    // newly added
+
     public String checkInputDynamic(String input, final String type, final int requiredLength) throws ExInvalidInputLength {
         if (input.isEmpty() || input.length() > requiredLength)
             throw new ExInvalidInputLength(type, requiredLength);

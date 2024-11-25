@@ -282,9 +282,9 @@ public class ShoppingCartTest {
         final int lineSeparator = 73;
         String snackTitle = String.format("\n%4s%-32s%-16s%-15s%-6s\n%s\n", " ", "Snacks/Drinks", "Portion", "Quantity",
                 "Price", "-".repeat(lineSeparator));
-        String formattedSnack = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n", 1, testSnack.getName(), " ",
+        String formattedSnack = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n", 1, testSnack.getName(), " ",
                 (testSnack).getPortion(), 1, " ", testSnack.getPrice());
-        String formattedDrink = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n%s\n", 2, testDrink.getName(), " ",
+        String formattedDrink = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n%s\n", 2, testDrink.getName(), " ",
                 testDrink.getPortion(), 1, " ", (testDrink).getPrice(), "-".repeat(lineSeparator));
         return snackTitle + formattedSnack + formattedDrink;
     }

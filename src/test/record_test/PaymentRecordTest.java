@@ -73,7 +73,7 @@ public class PaymentRecordTest {
         String formattedMovieTicket = MovieTicket.formatMovieTicketList(testMovieTicketList);
         String snackTitle = String.format("\n%4s%-32s%-16s%-15s%-6s\n%s\n", " ", "Snacks/Drinks", "Portion", "Quantity",
                 "Price", "-".repeat(lineSeparator));
-        String formattedSnack = String.format("%2d) %-30s%2s%-16s%3d%12s$%-4.1f\n", 1, testSnack.getName(), " ",
+        String formattedSnack = String.format("%2d) %-30s%2s%-16s%5d%10s$%-4.1f\n", 1, testSnack.getName(), " ",
                 (testSnack).getPortion(), 1, " ", testSnack.getPrice());
         expected += formattedMovieTicket + snackTitle + formattedSnack + "-".repeat(
                 lineSeparator) + "\n" + "~".repeat(lineSeparator) + "\n\n";

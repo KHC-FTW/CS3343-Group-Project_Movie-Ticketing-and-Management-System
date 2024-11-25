@@ -155,9 +155,9 @@ public class Database {
         movies.add(movie);
     }
 
-    public void addHouse(House house) {
-        houses.add(house);
-    }
+//    public void addHouse(House house) {
+//        houses.add(house);
+//    }
 
     public void addProduct(ProductWithPortion product) {
         products.add(product);
