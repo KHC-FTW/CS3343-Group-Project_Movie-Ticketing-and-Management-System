@@ -1,4 +1,4 @@
-package test.helper_test;
+package test.helper_movie_test;
 
 import org.junit.jupiter.api.Test;
 import release.exception.*;

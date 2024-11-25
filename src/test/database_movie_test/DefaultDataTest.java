@@ -1,4 +1,4 @@
-package test.database_test;
+package test.database_movie_test;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import release.database.DefaultData;
 import release.database.Database;
 import release.movie.Movie;
-import release.product.ProductWithPortion;
 
 import java.util.List;
 

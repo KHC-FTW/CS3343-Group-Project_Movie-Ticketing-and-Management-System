@@ -1,4 +1,4 @@
-package test.database_test;
+package test.database_movie_test;
 
 
 import org.junit.jupiter.api.BeforeEach;

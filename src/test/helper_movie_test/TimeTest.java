@@ -1,4 +1,4 @@
-package test.helper_test;
+package test.helper_movie_test;
 
 import release.helper.Time;
 
