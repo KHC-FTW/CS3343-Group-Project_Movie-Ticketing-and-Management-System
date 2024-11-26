@@ -55,7 +55,7 @@ public class CmdDoPayment implements Command{
                 throw new ExEarlyQuit("payment menu");
             }
             try {
-            int option = Integer.parseInt(input);
+                int option = Integer.parseInt(input);
                 Payment selectedPayment = getSelectedPayment(paymentList, option);
                 if(selectedPayment.doPayment(discountedPrice)){
                     Map<Product, Integer> paidProducts = currentUser.getShoppingCart().getProductCart();
