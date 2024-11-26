@@ -85,7 +85,7 @@ public class CmdDoPayment implements Command{
             } catch (ExInvalidPaymentOption e) {
                 System.out.println(e.getMessage() + "\n");
             } catch(NumberFormatException e){
-                System.out.print(new ExInvalidPaymentOption().getMessage() + "\n");
+                System.out.println(new ExInvalidPaymentOption().getMessage() + "\n");
             }
         }while(true);
 
