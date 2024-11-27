@@ -60,7 +60,7 @@ public class User {
 
     public Option getOption(String optName) throws ExInvalidOption {
         for (Option option : options)
-            if (option.getName().toLowerCase().equals(optName))
+            if (option.getName().toLowerCase().equals(optName.toLowerCase()))
                 return option;
 
         throw new ExInvalidOption();
