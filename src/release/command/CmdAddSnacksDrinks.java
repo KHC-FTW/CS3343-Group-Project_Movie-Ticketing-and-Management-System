@@ -68,7 +68,7 @@ public class CmdAddSnacksDrinks implements Command{
                     System.out.printf("[State] Successfully added %s, %s!%n%n", type, name);
                 }
 
-            } catch (ExInvalidOption e) {
+            } catch (ExInvalidOption | ExInsufficientArgs e) {
                 System.out.println(e.getMessage() + "\n");
             }
         }
