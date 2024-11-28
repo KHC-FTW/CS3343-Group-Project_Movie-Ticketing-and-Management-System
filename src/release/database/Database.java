@@ -175,6 +175,15 @@ public class Database {
         adminIdSet.clear();
         smallestAvailMemberId = 0;
         smallestAvailAdminId = 0;
+
+        // Default system admin user
+        User defaultAdmin = new Admin(getSmallestAdminId(), "Master Admin", "admin", "password", 20);
+        addAdmin(defaultAdmin);
+
+        // Add a default dummy member for quick testing purposes
+        // save the time to register each time when the program runs
+        User dummyMember = new Member(getSmallestMemberId(), "Dummy Member", "dummy", "password", 12, "Dummy School");
+        addMember(dummyMember);
     }
     
 }

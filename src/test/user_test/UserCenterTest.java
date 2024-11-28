@@ -1,13 +1,15 @@
 package test.user_test;
 
-import org.junit.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+//import org.junit.*;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertNotEquals;
 
+import org.junit.jupiter.api.Test;
 import release.exception.ExDuplicateUsername;
 import release.exception.ExUserNotExist;
 import release.user.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserCenterTest {
     @Test

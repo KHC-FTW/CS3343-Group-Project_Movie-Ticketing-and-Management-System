@@ -1,11 +1,14 @@
 package test.user_test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.List;
-import org.junit.*;
+//import org.junit.*;
 
+import org.junit.jupiter.api.Test;
 import release.user.*;
 import release.exception.ExInvalidOption;
 import release.in_out.*;
