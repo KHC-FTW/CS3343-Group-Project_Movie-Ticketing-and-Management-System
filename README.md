@@ -1,5 +1,6 @@
 
 # Movie Ticketing and Management System
+![image](https://github.com/user-attachments/assets/fd4165cb-36f4-44e0-9e3b-bc2323b09b23)
 
 ## Description
 A console-based input/output Java program that supports movie ticketing and management functions. Depending on the role, such as guest, member, and admin, users can enjoy different functions such as movie listing, seat booking, user management, movie scheduling, etc.
