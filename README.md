@@ -1,5 +1,5 @@
 
-# Movie Ticketing and Management System
+# CityU Cinema System
 ![image](https://github.com/user-attachments/assets/fd4165cb-36f4-44e0-9e3b-bc2323b09b23)
 
 ## Description
