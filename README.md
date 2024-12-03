@@ -11,7 +11,7 @@ A console-based input/output Java program that supports movie ticketing and mana
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/KHC-FTW/CS3343-Group-Project_Movie-Ticketing-and-Management-System.git
+   git clone [https://github.com/KHC-FTW/CS3343-Group-Project_Movie-Ticketing-and-Management-System.git](https://github.com/KHC-FTW/CS3343_24-25_Group-Project_CityU-Cinema-System.git)
    ```
 
 2. cd into the project directory:
