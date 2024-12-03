@@ -3,27 +3,32 @@ A console-based input/output Java program that supports movie ticketing and mana
 
 
 Installation:
-1. Build from source
-   1.1 Clone the repository:
+1. Prerequisites
+   - The program requires JDK 21 or later versions for compilation and execution.
+   - Make sure you have already installed a compatible JDK version.
+   - If not or if you face any jar compilation or runtime error, please download the latest JDK at https://www.oracle.com/hk/java/technologies/downloads/
+
+2. Build from source
+   2.1 Clone the repository:
        git clone https://github.com/KHC-FTW/CS3343_24-25_Group-Project_CityU-Cinema-System.git
 	
-   1.2 cd into the project directory:
+   2.2 cd into the project directory:
        cd CS3343_24-25_Group-Project_CityU-Cinema-System
 
-   1.3 Compile the source code. The following commands will compile the source code and place the compiled .class files in the bin directory:
+   2.3 Compile the source code. The following commands will compile the source code and place the compiled .class files in the bin directory:
        javac -classpath ./src ./src/release/Main.java -d ./bin
 
-   1.4 Run the program
+   2.4 Run the program
        java -classpath ./bin release.Main
 
-2. Run from JAR
-   2.1 Clone the repository (omit if already followed step 1 above):
+3. Run from JAR
+   3.1 Clone the repository (omit if already followed step 1 above):
        git clone https://github.com/KHC-FTW/CS3343_24-25_Group-Project_CityU-Cinema-System.git
 
-   2.2 cd into the project release directory:
+   3.2 cd into the project release directory:
        cd CS3343_24-25_Group-Project_CityU-Cinema-System/release
 
-   2.3 Run the JAR file:
+   3.3 Run the JAR file:
        java -jar "CityUCinemaSystem_V2.jar" or double click the Autorun.bat file (Windows operating system only)
 
 

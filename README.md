@@ -7,7 +7,13 @@ A console-based input/output Java program that supports movie ticketing and mana
 
 ## Installation
 
-### 1. Build from source
+### 1. Prerequisites
+- The program requires JDK 21 or later versions for compilation and execution.
+- Make sure you have already installed a compatible JDK version.
+- If not or if you face any jar compilation or runtime error, please download the latest JDK at [https://www.oracle.com/hk/java/technologies/downloads/](https://www.oracle.com/hk/java/technologies/downloads/)
+
+
+### 2. Build from source
 
 1. Clone the repository:
    ```sh
@@ -29,7 +35,7 @@ A console-based input/output Java program that supports movie ticketing and mana
    java -classpath ./bin release.Main
    ```
 
-### 2. Run from JAR
+### 3. Run from JAR
 
 1. Clone the repository (omit if already followed step 1 above):
    ```sh
