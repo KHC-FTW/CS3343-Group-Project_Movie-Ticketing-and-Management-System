@@ -5,10 +5,10 @@ A console-based input/output Java program that supports movie ticketing and mana
 Installation:
 1. Build from source
    1.1 Clone the repository:
-       git clone https://github.com/KHC-FTW/CS3343-Group-Project_Movie-Ticketing-and-Management-System.git
+       git clone https://github.com/KHC-FTW/CS3343_24-25_Group-Project_CityU-Cinema-System.git
 	
    1.2 cd into the project directory:
-       cd CS3343-Group-Project_Movie-Ticketing-and-Management-System
+       cd CS3343_24-25_Group-Project_CityU-Cinema-System
 
    1.3 Compile the source code. The following commands will compile the source code and place the compiled .class files in the bin directory:
        javac -classpath ./src ./src/release/Main.java -d ./bin
@@ -18,10 +18,10 @@ Installation:
 
 2. Run from JAR
    2.1 Clone the repository (omit if already followed step 1 above):
-       git clone https://github.com/KHC-FTW/CS3343-Group-Project_Movie-Ticketing-and-Management-System.git
+       git clone https://github.com/KHC-FTW/CS3343_24-25_Group-Project_CityU-Cinema-System.git
 
    2.2 cd into the project release directory:
-       cd CS3343-Group-Project_Movie-Ticketing-and-Management-System/release
+       cd CS3343_24-25_Group-Project_CityU-Cinema-System/release
 
    2.3 Run the JAR file:
        java -jar "CityUCinemaSystem_V2.jar" or double click the Autorun.bat file (Windows operating system only)
